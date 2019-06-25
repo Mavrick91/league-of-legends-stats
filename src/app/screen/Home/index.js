@@ -1,9 +1,24 @@
 // @flow
 
-import React from 'react'
+import { reduxForm } from 'redux-form'
+import { getSummonerInfo } from 'app/service/summoner/action'
+import Home from './Home'
 
-function Home() {
-  return <div>Home</div>
+function validate(value) {
+  const error = {}
+
+  if (!value.summonerName) {
+    error.summonerName = 'Field required'
+  }
+  return error
 }
 
-export default Home
+function onSubmit(value, dispatch) {
+  dispatch(getSummonerInfo(value.summonerName))
+}
+
+export default reduxForm({
+  form: 'home',
+  validate,
+  onSubmit,
+})(Home)
