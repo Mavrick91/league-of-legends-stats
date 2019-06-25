@@ -1,4 +1,5 @@
 import { takeLatest, call, put } from 'redux-saga/effects'
+import { push } from 'connected-react-router'
 import * as Api from 'app/api/endpoints'
 import {
   FETCH_SUMMONER_REQUEST,
@@ -13,6 +14,7 @@ export function* fetchSummonerInfo({ summonerName }) {
       yield put({ type: FETCH_SUMMONER_FAILED, message: 'Summoner not found' })
     }
     yield put({ type: FETCH_SUMMONER_SUCCEEDED, data })
+    yield put(push('/dashboard'))
   } catch (e) {
     yield put({ type: FETCH_SUMMONER_FAILED, message: 'Summoner not found' })
   }

@@ -1,9 +1,14 @@
 import React from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { Router, Route, Switch } from 'react-router-dom'
+import { history } from 'app/store'
 import Home from 'app/screen/Home'
+import Dashboard from 'app/screen/Dashboard'
 
 export default () => (
-  <Router>
-    <Route path="/" component={Home} />
+  <Router history={history}>
+    <Switch>
+      <Route path="/dashboard" component={Dashboard} />
+      <Route path="/" component={Home} />
+    </Switch>
   </Router>
 )
