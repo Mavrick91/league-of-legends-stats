@@ -9,10 +9,14 @@
     "react/display-name": 0,
     "object-curly-newline": 0,
     "react/require-default-props": 0,
-    "import/prefer-default-export": 0
+    "import/prefer-default-export": 0,
+    "import/no-extraneous-dependencies": 0,
+    "implicit-arrow-linebreak": 0,
+    "function-paren-newline": 0
   },
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "jest": true
   }
 }
