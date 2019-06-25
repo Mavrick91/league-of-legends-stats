@@ -18,9 +18,10 @@ describe('Summoner saga', () => {
       { summonerName: 'master thresh' },
     ).toPromise()
 
-    expect(dispatched).toEqual([
-      { type: FETCH_SUMMONER_SUCCEEDED, data: 'some fake data' },
-    ])
+    expect(dispatched).toContainEqual({
+      type: FETCH_SUMMONER_SUCCEEDED,
+      data: 'some fake data',
+    })
   })
 
   it('should reject api call', async () => {
@@ -37,8 +38,9 @@ describe('Summoner saga', () => {
       { summonerName: 'master thresh' },
     ).toPromise()
 
-    expect(dispatched).toEqual([
-      { type: FETCH_SUMMONER_FAILED, message: 'Summoner not found' },
-    ])
+    expect(dispatched).toContainEqual({
+      type: FETCH_SUMMONER_FAILED,
+      message: 'Summoner not found',
+    })
   })
 })
