@@ -18,8 +18,8 @@ export function* fetchSummonerInfo({ summonerName }) {
     } else {
       yield put({ type: FETCH_SUMMONER_SUCCEEDED, data })
       yield put(updateLoader(FETCH_SUMMONER_REQUEST, 0))
+      yield put(push('/dashboard'))
     }
-    yield put(push('/dashboard'))
   } catch (e) {
     yield put({ type: FETCH_SUMMONER_FAILED, message: 'Summoner not found' })
     yield put(updateLoader(FETCH_SUMMONER_REQUEST, -1))

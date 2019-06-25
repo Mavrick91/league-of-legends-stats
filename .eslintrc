@@ -1,5 +1,5 @@
 {
-  "extends": ["airbnb", "plugin:react/recommended"],
+  "extends": ["airbnb", "plugin:flowtype/recommended"],
   "parser": "babel-eslint",
   "plugins": ["flowtype"],
   "rules": {
