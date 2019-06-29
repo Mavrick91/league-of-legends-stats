@@ -11,7 +11,6 @@ type Props = {
   match: {
     params: { summonerName?: string },
   },
-  children: $ReadOnlyArray<React.Node>,
 }
 
 function Dashboard({
@@ -20,7 +19,6 @@ function Dashboard({
   },
   isSummonerLoaded,
   fetchSummonerId,
-  children,
   summoner,
 }: Props) {
   if (!summonerName) return <Redirect to="/" />
@@ -33,7 +31,6 @@ function Dashboard({
     <div>
       <span>Dashboard</span>
       <ProfileIcon profileIconId={summoner.profileIconId} />
-      {children}
     </div>
   )
 }

@@ -25,7 +25,7 @@ export function* fetchSummonerInfo({ summonerName }) {
         yield put(push(`/dashboard/${summonerName}`))
     }
   } catch (e) {
-    yield put({ type: FETCH_SUMMONER_FAILED, message: e })
+    yield put({ type: FETCH_SUMMONER_FAILED, message: 'Summoner not found' })
     yield put(updateLoader(FETCH_SUMMONER_REQUEST, -1))
   }
 }

@@ -4,6 +4,14 @@ import { fetchSummonerInfo } from '../saga'
 import { FETCH_SUMMONER_SUCCEEDED, FETCH_SUMMONER_FAILED } from '../reducer'
 
 describe('Summoner saga', () => {
+  const getState = jest.fn(() => ({
+    router: {
+      location: {
+        pathname: 'lol',
+      },
+    },
+  }))
+
   it('should resolve api call', async () => {
     mockAxios.get.mockImplementationOnce(() =>
       Promise.resolve({ data: 'some fake data', status: 200 }),
@@ -13,6 +21,7 @@ describe('Summoner saga', () => {
     await runSaga(
       {
         dispatch: action => dispatched.push(action),
+        getState,
       },
       fetchSummonerInfo,
       { summonerName: 'master thresh' },
@@ -33,14 +42,15 @@ describe('Summoner saga', () => {
     await runSaga(
       {
         dispatch: action => dispatched.push(action),
+        getState,
       },
       fetchSummonerInfo,
       { summonerName: 'master thresh' },
     ).toPromise()
 
     expect(dispatched).toContainEqual({
-      type: FETCH_SUMMONER_FAILED,
       message: 'Summoner not found',
+      type: FETCH_SUMMONER_FAILED,
     })
   })
 })
