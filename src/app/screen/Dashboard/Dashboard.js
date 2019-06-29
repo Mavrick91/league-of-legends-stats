@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom'
 
 type Props = {
   isSummonerLoaded: boolean,
-  fetchSummonerId: (string) => void,
+  fetchSummonerId: string => void,
   match: {
     params: { summonerName?: string },
   },
@@ -21,7 +21,10 @@ function Dashboard({
   children,
 }: Props) {
   if (!summonerName) return <Redirect to="/" />
-  if (!isSummonerLoaded) fetchSummonerId(summonerName)
+  if (!isSummonerLoaded) {
+    fetchSummonerId(summonerName)
+    return <div>Loading...</div>
+  }
 
   return (
     <div>
