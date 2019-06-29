@@ -1,6 +1,6 @@
 import { FETCH_SUMMONER_REQUEST } from './reducer'
 
-export function getSummonerInfo(summonerName) {
+export function getSummonerId(summonerName) {
   return {
     type: FETCH_SUMMONER_REQUEST,
     summonerName,
