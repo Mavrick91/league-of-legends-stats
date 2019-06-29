@@ -1,7 +1,7 @@
 // @flow
 
 import { reduxForm } from 'redux-form'
-import { getSummonerInfo } from 'app/service/summoner/action'
+import { getSummonerId } from 'app/service/summoner/action'
 import Home from './Home'
 
 function validate(value) {
@@ -14,7 +14,7 @@ function validate(value) {
 }
 
 function onSubmit(value, dispatch) {
-  dispatch(getSummonerInfo(value.summonerName))
+  dispatch(getSummonerId(value.summonerName))
 }
 
 export default reduxForm({
