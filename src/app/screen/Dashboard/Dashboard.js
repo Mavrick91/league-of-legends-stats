@@ -1,8 +1,9 @@
 // @flow
 
-import * as React from 'react'
+import React from 'react'
+import { isEmpty } from 'ramda'
 import { Redirect } from 'react-router-dom'
-import ProfileIcon from 'app/components/ProfileIcon'
+import InformationSummoner from './components/InformationSummoner'
 
 type Props = {
   isSummonerLoaded: boolean,
@@ -28,9 +29,13 @@ function Dashboard({
   }
 
   return (
-    <div>
-      <span>Dashboard</span>
-      <ProfileIcon profileIconId={summoner.profileIconId} />
+    <div style={{ padding: '26px' }}>
+      <InformationSummoner
+        profileIconId={summoner.profileIconId}
+        name={summoner.name}
+        summonerLevel={summoner.summonerLevel}
+        tier={summoner.tier}
+      />
     </div>
   )
 }
