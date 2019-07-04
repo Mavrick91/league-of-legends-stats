@@ -1,31 +1,19 @@
-import { getSummonerNameSelector, getAccountIdSelector } from '../selector'
+import { getSummonerSelector } from '../selector'
 
 describe('Summoner selector', () => {
-  describe('getAccountIdSelector', () => {
-    it('should return the account Id', () => {
-      const accountId = '1234567890'
-      const mockState = {
-        summonerState: {
-          accountId,
+  describe('getSummonerSelector', () => {
+    it('should return the summoner', () => {
+      const summonerState = {
+        fake: {
+          date: 'lol',
         },
       }
-      const result = getAccountIdSelector(mockState)
-
-      expect(result).toEqual(accountId)
-    })
-  })
-
-  describe('getSummonerNameSelector', () => {
-    it('should return the account Id', () => {
-      const name = 'master thresh'
       const mockState = {
-        summonerState: {
-          name,
-        },
+        summonerState,
       }
-      const result = getSummonerNameSelector(mockState)
+      const result = getSummonerSelector(mockState)
 
-      expect(result).toEqual(name)
+      expect(result).toEqual(summonerState)
     })
   })
 })

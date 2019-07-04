@@ -1,6 +1,7 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
 import { MemoryRouter } from 'react-router-dom'
+import ProfileIcon from 'app/components/ProfileIcon'
 import Dashboard from '../Dashboard'
 import Home from '../../Home'
 import App from '../../../../App'
@@ -10,6 +11,9 @@ describe('Dashboard', () => {
     fetchSummonerId: jest.fn(),
     match: { params: null },
     isSummonerLoaded: false,
+    summoner: {
+      profileIconId: 123,
+    },
     ...overrides,
   })
 
@@ -55,12 +59,8 @@ describe('Dashboard', () => {
       match: { params: { summonerName: 'papa' } },
       isSummonerLoaded: true,
     })
-    const wrapper = shallow(
-      <Dashboard {...props}>
-        <div>test</div>
-      </Dashboard>,
-    )
+    const wrapper = shallow(<Dashboard {...props} />)
 
-    expect(wrapper.text()).toContain('test')
+    expect(wrapper.find(ProfileIcon)).toHaveLength(1)
   })
 })

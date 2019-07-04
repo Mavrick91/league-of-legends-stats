@@ -1,15 +1,17 @@
 // @flow
 
-import * as React from 'react'
+import React from 'react'
+import { isEmpty } from 'ramda'
 import { Redirect } from 'react-router-dom'
+import InformationSummoner from './components/InformationSummoner'
 
 type Props = {
   isSummonerLoaded: boolean,
   fetchSummonerId: string => void,
+  summoner: SummonerType,
   match: {
     params: { summonerName?: string },
   },
-  children: $ReadOnlyArray<React.Node>,
 }
 
 function Dashboard({
@@ -18,7 +20,7 @@ function Dashboard({
   },
   isSummonerLoaded,
   fetchSummonerId,
-  children,
+  summoner,
 }: Props) {
   if (!summonerName) return <Redirect to="/" />
   if (!isSummonerLoaded) {
@@ -27,9 +29,13 @@ function Dashboard({
   }
 
   return (
-    <div>
-      <span>Dashboard</span>
-      {children}
+    <div style={{ padding: '26px' }}>
+      <InformationSummoner
+        profileIconId={summoner.profileIconId}
+        name={summoner.name}
+        summonerLevel={summoner.summonerLevel}
+        tier={summoner.tier}
+      />
     </div>
   )
 }

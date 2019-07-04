@@ -2,12 +2,13 @@ import { createGlobalStyle } from 'styled-components'
 import colors from './colors'
 
 export const theme = {
-  ...colors,
+  colors: { ...colors },
 }
 
 const GlobalStyle = createGlobalStyle`
   *, *:before, *:after {
     box-sizing: border-box;
+    font-family: Helvetica,serif;
   }
 
   html, body, #root {

@@ -1,5 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import TextFieldInput from 'app/components/TextField'
 import Home from '../Home'
 
 describe('Home', () => {
@@ -11,11 +12,11 @@ describe('Home', () => {
   })
 
   it('should have a TextFieldInput', () => {
-    expect(wrapper.find('TextFieldInput')).toHaveLength(1)
+    expect(wrapper.find(TextFieldInput)).toHaveLength(1)
   })
 
   it('TextFieldInput should have the correct prop name', () => {
-    expect(wrapper.find('TextFieldInput').prop('name')).toEqual('summonerName')
+    expect(wrapper.find(TextFieldInput).prop('name')).toEqual('summonerName')
   })
 
   it('should call the onSubmit method', () => {
