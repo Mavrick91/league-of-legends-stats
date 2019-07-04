@@ -6,7 +6,6 @@ import { Redirect } from 'react-router-dom'
 import InformationSummoner from './components/InformationSummoner'
 
 type Props = {
-  isSummonerLoaded: boolean,
   fetchSummonerId: string => void,
   summoner: SummonerType,
   match: {
@@ -18,15 +17,15 @@ function Dashboard({
   match: {
     params: { summonerName },
   },
-  isSummonerLoaded,
   fetchSummonerId,
   summoner,
 }: Props) {
   if (!summonerName) return <Redirect to="/" />
-  if (!isSummonerLoaded) {
+  if (isEmpty(summoner)) {
     fetchSummonerId(summonerName)
     return <div>Loading...</div>
   }
+  if (summoner.error) return <div>Error while fetching</div>
 
   return (
     <div style={{ padding: '26px' }}>
