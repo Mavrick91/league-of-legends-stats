@@ -1,8 +1,10 @@
 // @flow
 
 import React from 'react'
+import { pick } from 'ramda'
 import styled from 'styled-components'
-import SoloRanked from './components/SoloRanked'
+import SimpleCard from 'app/components/SimpleCard'
+import { SummonerContext } from '../Dashboard/Dashboard'
 
 const Wrapper = styled.div`
   display: flex;
@@ -14,10 +16,22 @@ const LeftSide = styled.div`
 `
 
 function Resume() {
+  const summoner = React.useContext(SummonerContext)
+
+  const soloRanked = pick(
+    ['tier', 'rank', 'leaguePoints', 'wins', 'losses', 'leagueName'],
+    summoner,
+  )
   return (
     <Wrapper>
       <LeftSide>
-        <SoloRanked />
+        <SimpleCard title="Classé Solo" {...soloRanked} />
+        <SimpleCard
+          title="Flex 5:5 Rank"
+          showLeague={false}
+          imageSize="sm"
+          {...soloRanked}
+        />
       </LeftSide>
       <div>seconde partie</div>
     </Wrapper>

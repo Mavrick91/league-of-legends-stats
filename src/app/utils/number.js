@@ -38,7 +38,7 @@ export function romanToInt(str1) {
   return num
 }
 
-export function getWinRatio(wins, losses) {
+export function getWinRate(wins, losses) {
   const total = wins + losses
   return Math.floor((wins / total) * 100)
 }
