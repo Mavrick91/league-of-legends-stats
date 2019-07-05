@@ -19,5 +19,6 @@ declare type SummonerType = {
   tier: string,
   veteran: boolean,
   wins: number,
+  leagueName: string,
   error: string,
 }
