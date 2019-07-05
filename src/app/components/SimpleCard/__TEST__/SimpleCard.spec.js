@@ -1,37 +1,41 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { getByText } from '@testing-library/dom'
-import { SummonerContext } from 'app/screen/Dashboard/Dashboard'
+import { theme } from 'app/style'
 import 'jest-dom/extend-expect'
-import SoloRanked from '../index'
+import SimpleCard from '..'
+import { ThemeProvider } from 'styled-components'
 
-describe('SoloRanked', () => {
-  const summoner = overrides => ({
+describe('SimpleCard', () => {
+  const defaultProps = overrides => ({
     tier: 'SILVER',
     rank: 'III',
     leaguePoints: 123,
     wins: 10,
     losses: 10,
     leagueName: 'fake league name',
+    title: 'newTitle',
     ...overrides,
   })
 
-  const Component = props => (
-    <SummonerContext.Provider value={summoner(props)}>
-      <SoloRanked />
-    </SummonerContext.Provider>
-  )
+  const getContainer = props =>
+    render(
+      <ThemeProvider theme={theme}>
+        <SimpleCard {...defaultProps(props)} />
+      </ThemeProvider>,
+    )
 
   describe('When all props are given', () => {
-    const getContainer = props => render(<Component {...props} />)
+    it('should display the title', () => {
+      const { container } = getContainer()
+      expect(getByText(container, 'newTitle')).toBeInTheDocument()
+    })
 
-    it.skip('should display the emblem', () => {
-      const { container, debug } = getContainer()
-
-      debug()
+    it('should display the emblem', () => {
+      const { container } = getContainer()
       expect(container.querySelector('img')).toHaveAttribute(
         'src',
-        `${summoner.tier.toLowerCase()}.png`,
+        'silver.png',
       )
     })
 
@@ -50,14 +54,23 @@ describe('SoloRanked', () => {
       expect(getByText(container, /10V 10D/)).toBeInTheDocument()
     })
 
-    it('should display the win ratio', () => {
+    it('should display the win rate', () => {
       const { container } = getContainer()
-      expect(getByText(container, 'Win Ratio 50%')).toBeInTheDocument()
+      expect(getByText(container, 'Win Rate 50%')).toBeInTheDocument()
     })
 
     it('should display the league name', () => {
       const { container } = getContainer()
       expect(getByText(container, 'fake league name')).toBeInTheDocument()
+    })
+  })
+
+  describe('When showLeague is false', () => {
+    it('should not display league name', () => {
+      const { container } = getContainer({ showLeague: false })
+      expect(
+        container.querySelector('fake league name'),
+      ).not.toBeInTheDocument()
     })
   })
 })

@@ -22,7 +22,7 @@ const NameAndRank = styled.div`
 const Name = styled.div`
   ${({ theme: { colors } }) =>
     css`
-      color: ${colors.blackLight};
+      color: ${colors.black10};
       font-size: 20px;
       font-weight: bold;
       font-family: 'Helvetica Neue', serif;
