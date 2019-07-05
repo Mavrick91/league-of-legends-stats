@@ -3,6 +3,7 @@ import { shallow, mount } from 'enzyme'
 import { MemoryRouter } from 'react-router-dom'
 import Dashboard from '../Dashboard'
 import Home from '../../Home'
+import Resume from '../../Resume'
 import App from '../../../../App'
 import InformationSummoner from '../components/InformationSummoner'
 
@@ -49,16 +50,21 @@ describe('Dashboard', () => {
   })
 
   describe('When everything is ok', () => {
-    it('should render component', () => {
-      const props = getInitialProps({
-        match: { params: { summonerName: 'papa' } },
-        summoner: {
-          fake: 'data',
-        },
-      })
-      const wrapper = shallow(<Dashboard {...props} />)
+    const props = getInitialProps({
+      match: { params: { summonerName: 'papa' } },
+      summoner: {
+        fake: 'data',
+      },
+    })
 
+    const wrapper = shallow(<Dashboard {...props} />)
+
+    it('should render InformationSummoner component', () => {
       expect(wrapper.find(InformationSummoner)).toHaveLength(1)
+    })
+
+    it('should display Resume', () => {
+      expect(wrapper.find(Resume)).toHaveLength(1)
     })
   })
 

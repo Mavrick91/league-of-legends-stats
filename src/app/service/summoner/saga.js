@@ -1,4 +1,5 @@
 import { takeLatest, call, put, select } from 'redux-saga/effects'
+import { pathOr } from 'ramda'
 import { push } from 'connected-react-router'
 import * as Api from 'app/api/endpoints'
 import { getPathnameSelector } from 'app/service/route/selector'
@@ -23,20 +24,28 @@ export function* fetchSummonerId(summonerName) {
   return response.data
 }
 
+export function* fetchSummonerLeagueName(leagueId) {
+  const { response, error } = yield call(Api.getSummonerLeagueName, leagueId)
+  if (error) throw new Error(error)
+  return response.data
+}
+
 function* fetchInfo({ summonerName }) {
   const pathname = yield select(getPathnameSelector)
+  let league = {}
 
   try {
     const summonerIds = yield call(fetchSummonerId, summonerName)
-    const league = yield call(fetchSummonerLeague, summonerIds.id)
+    const arrleague = yield call(fetchSummonerLeague, summonerIds.id)
+    const summonerLeague = pathOr(null, ['0'], arrleague)
+    if (summonerLeague)
+      league = yield call(fetchSummonerLeagueName, summonerLeague.leagueId)
 
-    console.log('{ ...summonerIds, ...league[0] } ----->', { ...summonerIds, ...league[0] });
     yield put({
       type: FETCH_SUMMONER_SUCCEEDED,
-      data: { ...summonerIds, ...league[0] },
+      data: { ...summonerIds, ...summonerLeague, leagueName: league.name },
     })
   } catch (e) {
-    console.log('e ----->', e.message)
     yield put({ type: FETCH_SUMMONER_FAILED, message: e.message })
   }
 

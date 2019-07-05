@@ -15,3 +15,10 @@ export function getSummonerLeague(encryptedSummonerId) {
     .then(response => ({ response }))
     .catch(() => ({ error: 'Summoner\'s league not found' }))
 }
+
+export function getSummonerLeagueName(leagueId) {
+  return customAxios
+    .get(`/lol/league/v4/leagues/${leagueId}`)
+    .then(response => ({ response }))
+    .catch(() => ({ error: 'Summoner\'s league name not found' }))
+}

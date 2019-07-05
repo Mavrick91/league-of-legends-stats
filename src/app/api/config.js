@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_KEY = 'RGAPI-093f4d43-5ae8-4722-8308-c5c855128d0b'
+const API_KEY = 'RGAPI-9317601f-08cf-4aa9-b6f6-6fa7617e85ef'
 
 export const ITEM_VERSION = '9.13.1'
 export const RUNE_VERSION = '7.23.1'
