@@ -6,10 +6,6 @@ export function* fetchEntity(action) {
   try {
     const response = yield call(apiEndpoint, ...urlParams)
 
-    if (Array.isArray(response.data)) {
-      response.data = response.data[0]
-    }
-
     yield put({
       type: `${entityName.toUpperCase()}_SUCCESS`,
       entityName,

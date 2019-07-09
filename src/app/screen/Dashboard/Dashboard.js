@@ -9,9 +9,10 @@ import InformationSummoner from './components/InformationSummoner'
 
 type Props = {
   summoner: SummonerType,
-  myleague: MyLeagueType,
+  rankedSolo: SoloFlexRanked,
 }
-function Dashboard({ summoner, myleague }: Props) {
+
+function Dashboard({ summoner, rankedSolo }: Props) {
   const [valueTab, setValueTab] = React.useState(0)
 
   return (
@@ -20,7 +21,7 @@ function Dashboard({ summoner, myleague }: Props) {
         profileIconId={summoner.profileIconId}
         name={summoner.name}
         summonerLevel={summoner.summonerLevel}
-        tier={myleague.tier}
+        tier={rankedSolo.tier}
       />
       <AppBar position="static">
         <Tabs

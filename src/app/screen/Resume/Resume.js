@@ -16,27 +16,26 @@ const LeftSide = styled.div`
 `
 
 function Resume() {
-  const { myleague, league } = React.useContext(SummonerContext)
-
-  const soloRanked = pick(
-    ['tier', 'rank', 'leaguePoints', 'wins', 'losses'],
-    myleague,
-  )
-
+  const { league, rankedSolo, rankedFlex } = React.useContext(SummonerContext)
   return (
     <Wrapper>
       <LeftSide>
         <SimpleCard
           leagueName={league.name}
           title="Classé Solo"
-          {...soloRanked}
+          {...pick(
+            ['tier', 'rank', 'leaguePoints', 'wins', 'losses'],
+            rankedSolo,
+          )}
         />
         <SimpleCard
           title="Flex 5:5 Rank"
           showLeague={false}
           imageSize="sm"
-          leagueName={league.name}
-          {...soloRanked}
+          {...pick(
+            ['tier', 'rank', 'leaguePoints', 'wins', 'losses'],
+            rankedFlex,
+          )}
         />
       </LeftSide>
       <div>seconde partie</div>

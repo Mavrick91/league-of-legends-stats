@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom'
 import {
   getLeagueSelector,
   getMyleagueSelector,
+  getSoloFlexRanked,
   getSummonerSelector,
   hasEntityError,
   isEntityFetching,
@@ -39,9 +40,15 @@ function DashboardContainer({
     params: { summonerName },
   },
 }: Props) {
-  const { summoner, myleague, league } = useEntities(summonerName)
+  const { summoner, league } = useEntities(summonerName)
   const isFetching = useSelector(isEntityFetching)
   const entityError = useSelector(hasEntityError)
+  const rankedSolo = useSelector(state =>
+    getSoloFlexRanked(state, 'RANKED_SOLO_5x5'),
+  )
+  const rankedFlex = useSelector(state =>
+    getSoloFlexRanked(state, 'RANKED_FLEX_SR'),
+  )
 
   if (!summonerName) return <Redirect to="/" />
   if (isFetching) return <div>Loading...</div>
@@ -52,10 +59,11 @@ function DashboardContainer({
       value={{
         summoner,
         league,
-        myleague,
+        rankedSolo,
+        rankedFlex,
       }}
     >
-      <Dashboard summoner={summoner} myleague={myleague} />
+      <Dashboard summoner={summoner} rankedSolo={rankedSolo} />
     </SummonerContext.Provider>
   )
 }
