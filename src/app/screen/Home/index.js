@@ -1,7 +1,6 @@
 // @flow
 
 import { reduxForm } from 'redux-form'
-import { getSummonerId } from 'app/service/summoner/action'
 import Home from './Home'
 
 function validate(value) {
@@ -13,8 +12,8 @@ function validate(value) {
   return error
 }
 
-function onSubmit(value, dispatch) {
-  dispatch(getSummonerId(value.summonerName))
+function onSubmit(value, _, { history }) {
+  history.push(`/dashboard/${value.summonerName}`)
 }
 
 export default reduxForm({

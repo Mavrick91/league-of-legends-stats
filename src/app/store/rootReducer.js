@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
 import { connectRouter } from 'connected-react-router'
-import summonerState from 'app/service/summoner/reducer'
 import { reducer as formReducer } from 'redux-form'
+import entitiesReducer from './reducer'
 
 export default history =>
   combineReducers({
     form: formReducer,
-    summonerState,
+    entities: entitiesReducer,
     router: connectRouter(history),
   })

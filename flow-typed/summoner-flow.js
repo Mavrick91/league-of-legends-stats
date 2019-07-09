@@ -22,3 +22,30 @@ declare type SummonerType = {
   leagueName: string,
   error: string,
 }
+
+declare type MyLeagueType = {
+  leagueId: string,
+  queueType: string,
+  tier: string,
+  rank: string,
+  summonerId: string,
+  summonerName: string,
+  leaguePoints: number,
+  wins: number,
+  losses: number,
+  veteran: boolean,
+  inactive: boolean,
+  freshBlood: boolean,
+  hotStreak: boolean,
+  isFetching: boolean,
+  error: ?string,
+}
+
+declare type LeagueType = {
+  error: ?string,
+  isFetching: boolean,
+  leagueId: string,
+  name: string,
+  queue: string,
+  tier: string,
+}
