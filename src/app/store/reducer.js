@@ -14,7 +14,11 @@ function entitiesReducer(state = {}, action) {
   if (type.endsWith('SUCCESS')) {
     return {
       ...state,
-      [entityName.toLowerCase()]: { ...payload, isFetching: false, error: null },
+      [entityName.toLowerCase()]: {
+        ...payload,
+        isFetching: false,
+        error: null,
+      },
     }
   }
 

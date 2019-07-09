@@ -35,3 +35,17 @@ export const hasEntityError = createSelector(
     return state.entities[entity].error
   },
 )
+
+export const getSoloFlexRanked = createSelector(
+  getMyleague,
+  (_, arg) => arg,
+  (myleague, queueType) => {
+    if (!myleague) return {}
+
+    return (
+      Object.values(myleague).find(
+        value => value && value.queueType === queueType,
+      ) || {}
+    )
+  },
+)
