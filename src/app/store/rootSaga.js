@@ -1,6 +1,6 @@
 import { fork, all } from 'redux-saga/effects'
-import summonerSaga from 'app/service/summoner/saga'
+import genericSaga from './saga'
 
 export default function* rootSaga() {
-  yield all([fork(summonerSaga)])
+  yield all([fork(genericSaga)])
 }
