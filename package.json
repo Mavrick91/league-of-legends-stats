@@ -10,6 +10,7 @@
     "connected-react-router": "^6.4.0",
     "history": "latest",
     "http-proxy-middleware": "latest",
+    "moment": "^2.24.0",
     "prettier": "^1.18.2",
     "ramda": "^0.26.1",
     "react": "^16.8.6",

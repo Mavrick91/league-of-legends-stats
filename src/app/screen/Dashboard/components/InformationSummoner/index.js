@@ -66,4 +66,4 @@ function InformationSummoner({
   )
 }
 
-export default InformationSummoner
+export default React.memo(InformationSummoner)

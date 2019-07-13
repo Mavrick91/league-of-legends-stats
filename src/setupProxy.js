@@ -6,5 +6,9 @@ module.exports = function setupProxy(app) {
       changeOrigin: true,
       target: 'https://euw1.api.riotgames.com/',
     }),
+    proxy('/cdn', {
+      changeOrigin: true,
+      target: 'https://ddragon.leagueoflegends.com/',
+    }),
   )
 }

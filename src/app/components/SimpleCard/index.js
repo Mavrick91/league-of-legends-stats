@@ -121,4 +121,4 @@ function SimpleCard({
   )
 }
 
-export default SimpleCard
+export default React.memo(SimpleCard)
