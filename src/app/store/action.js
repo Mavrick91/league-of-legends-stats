@@ -3,16 +3,18 @@
 type TypeParams = {
   entityName: string,
   apiEndpoint: () => void,
-  urlParams: Array<String>,
+  args: Array<String>,
 }
 
 export const fetchInfo = ({
   entityName,
   apiEndpoint,
-  urlParams,
-}: TypeParams) => ({
-  type: 'ENTITY_REQUEST',
-  entityName,
-  apiEndpoint,
-  urlParams,
-})
+  args,
+}: TypeParams) => {
+  return ({
+    type: 'ENTITY_REQUEST',
+    entityName,
+    apiEndpoint,
+    payload: args,
+  })
+}

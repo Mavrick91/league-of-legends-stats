@@ -1,0 +1,65 @@
+// @flow
+
+import React from 'react'
+import styled from 'styled-components'
+import ParticipantRow from './ParticipantRow'
+
+type Props = {
+  myTeamId: number,
+  participants: $ReadOnlyArray<ParticipantType>,
+  participantIdentities: $ReadOnlyArray<ParticipantIdentityType>,
+}
+
+const Wrapper = styled.div`
+  width: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const Team = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 85px;
+`
+
+function Participants({ participants, participantIdentities, myTeamId }: Props) {
+  function getTeam(myTeam) {
+    return participants.filter(participant => {
+      if (myTeam) return participant.teamId === myTeamId
+      return participant.teamId !== myTeamId
+    })
+  }
+
+  function displayTeam(team) {
+    return (
+      <Team>
+        {team.map(teamPlayer => {
+          const participantIdentity = (participantIdentities.find(
+            (item: *) => item.participantId === teamPlayer.participantId,
+          ): any)
+
+          return (
+            <ParticipantRow
+              key={teamPlayer.championId}
+              championId={teamPlayer.championId}
+              player={participantIdentity.player}
+            />
+          )
+        })}
+      </Team>
+    )
+  }
+
+  const myTeam = getTeam(true)
+  const enemyTeam = getTeam(false)
+
+  return (
+    <Wrapper>
+      {displayTeam(myTeam)}
+      {displayTeam(enemyTeam)}
+    </Wrapper>
+  )
+}
+
+export default Participants
