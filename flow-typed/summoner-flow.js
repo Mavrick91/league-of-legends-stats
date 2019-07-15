@@ -104,6 +104,7 @@ declare type TeamType = {
 declare type ParticipantType = {
   participantId: number,
   teamId: number,
+  highestAchievedSeasonTier: string,
   championId: number,
   spell1Id: number,
   spell2Id: number,
@@ -236,7 +237,7 @@ declare type ParticipantType = {
   },
 }
 
-declare type ParticipantIdentityType =     {
+declare type ParticipantIdentityType = {
   participantId: number,
   player: {
     platformId: string,

@@ -6,8 +6,8 @@ import ParticipantRow from './ParticipantRow'
 
 type Props = {
   myTeamId: number,
-  participants: ParticipantType,
-  participantIdentities: ParticipantIdentityType,
+  participants: $ReadOnlyArray<ParticipantType>,
+  participantIdentities: $ReadOnlyArray<ParticipantIdentityType>,
 }
 
 const Wrapper = styled.div`
@@ -34,15 +34,19 @@ function Participants({ participants, participantIdentities, myTeamId }: Props) 
   function displayTeam(team) {
     return (
       <Team>
-        {team.map(player => (
-          <ParticipantRow
-            key={player.championId}
-            championId={player.championId}
-            player={
-              participantIdentities.find(item => item.participantId === player.participantId).player
-            }
-          />
-        ))}
+        {team.map(teamPlayer => {
+          const participantIdentity = (participantIdentities.find(
+            (item: *) => item.participantId === teamPlayer.participantId,
+          ): any)
+
+          return (
+            <ParticipantRow
+              key={teamPlayer.championId}
+              championId={teamPlayer.championId}
+              player={participantIdentity.player}
+            />
+          )
+        })}
       </Team>
     )
   }

@@ -13,7 +13,7 @@ import Timeline from './TimeLine'
 
 type Props = {
   matchDetail: MatchDetailType,
-  summonerId: number,
+  summonerId: string,
 }
 
 const Wrapper = styled.div`
@@ -26,24 +26,27 @@ const Wrapper = styled.div`
 `
 
 function MatchRow({ matchDetail, summonerId }: Props) {
-  function getParticipantIdentities() {
-    return Object.values(matchDetail.participantIdentities).find(
+  function getParticipantIdentities(): ParticipantIdentityType {
+    return (Object.values(matchDetail.participantIdentities): any).find(
       participant => participant.player.summonerId === summonerId,
     )
   }
 
-  function getParticipantsById(myParticipantId) {
-    return Object.values(matchDetail.participants).find(
+  function getParticipantsById(myParticipantId): ParticipantType {
+    return (Object.values(matchDetail.participants): any).find(
       participant => participant.participantId === myParticipantId,
     )
   }
 
-  function getIsMatchWin(myTeamId) {
-    return Object.values(matchDetail.teams).find(team => team.teamId === myTeamId).win === 'Win'
+  function getIsMatchWin(myTeamId): boolean {
+    return (
+      (Object.values(matchDetail.teams): any).find((team: TeamType) => team.teamId === myTeamId)
+        .win === 'Win'
+    )
   }
 
-  function getTeamEnemyTotalDeath(myTeamId) {
-    return Object.values(matchDetail.participants).reduce((acc, key) => {
+  function getTeamEnemyTotalDeath(myTeamId): number {
+    return (Object.values(matchDetail.participants): any).reduce((acc, key) => {
       if (key.teamId === myTeamId) return acc
 
       return acc + key.stats.deaths
@@ -104,11 +107,11 @@ function MatchRow({ matchDetail, summonerId }: Props) {
       />
       <Participants
         myTeamId={teamId}
-        participants={Object.values(matchDetail.participants)}
-        participantIdentities={Object.values(matchDetail.participantIdentities)}
+        participants={(Object.values(matchDetail.participants): any)}
+        participantIdentities={(Object.values(matchDetail.participantIdentities): any)}
       />
     </Wrapper>
   )
 }
 
-export default React.memo(MatchRow)
+export default React.memo<Props>(MatchRow)

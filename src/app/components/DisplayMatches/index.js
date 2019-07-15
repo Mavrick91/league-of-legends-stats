@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import MatchRow from './MatchRow'
 
 type Props = {
-  matchDetails: *,
+  matchDetails: $ReadOnlyArray<$Exact<MatchDetailType>>,
   summoner: SummonerType,
 }
 
@@ -18,11 +18,11 @@ const Wrapper = styled.div`
 function DisplayMatches({ matchDetails, summoner }: Props) {
   return (
     <Wrapper>
-      {matchDetails.map((matchDetail: MatchType) => (
+      {matchDetails.map(matchDetail => (
         <MatchRow key={matchDetail.gameId} matchDetail={matchDetail} summonerId={summoner.id} />
       ))}
     </Wrapper>
   )
 }
 
-export default React.memo(DisplayMatches)
+export default React.memo<Props>(DisplayMatches)

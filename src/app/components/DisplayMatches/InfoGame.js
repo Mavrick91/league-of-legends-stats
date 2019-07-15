@@ -5,10 +5,10 @@ import styled, { css } from 'styled-components'
 import { capitalize } from 'app/utils/string'
 
 type Props = {
-  champLevel: string,
-  nbMinionsKilled: string,
+  champLevel: number,
+  nbMinionsKilled: number,
   actualRank: string,
-  killParticipation: string,
+  killParticipation: number,
 }
 
 const Wrapper = styled.div`

@@ -4,9 +4,9 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 type Props = {
-  kills: string,
-  deaths: string,
-  assists: string,
+  kills: number,
+  deaths: number,
+  assists: number,
 }
 
 const Wrapper = styled.div`

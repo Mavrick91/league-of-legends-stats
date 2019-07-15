@@ -39,4 +39,4 @@ function Dashboard({ summoner, rankedSolo }: Props) {
   )
 }
 
-export default React.memo(Dashboard)
+export default React.memo<Props>(Dashboard)

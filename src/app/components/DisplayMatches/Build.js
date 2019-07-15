@@ -7,7 +7,7 @@ import blueBourse from 'app/ressources/images/blue_bourse.png'
 import redBourse from 'app/ressources/images/red_bourse.png'
 
 type Props = {
-  items: $ReadOnlyArray<string>,
+  items: $ReadOnlyArray<{ id: number, item: number }>,
   isWin: boolean,
 }
 
