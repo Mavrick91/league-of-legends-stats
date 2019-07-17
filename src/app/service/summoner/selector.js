@@ -5,7 +5,6 @@ const getSummoner = state => state.entities.summoner
 const getMyleague = state => state.entities.myleague
 const getLeague = state => state.entities.league
 const getMatchLists = state => pathOr([], ['matchlists', 'matches'], state.entities)
-const getMatches = state => state.entities.match
 const getListChampions = state => state.entities.allchampions
 const getSummonerSpells = state => state.entities.summonerspells
 
@@ -22,14 +21,6 @@ export const getLeagueSelector = createSelector(
 export const getMatchListsSelector = createSelector(
   getMatchLists,
   matchLists => matchLists,
-)
-
-export const getMatchDetailsSelector = createSelector(
-  getMatches,
-  matches =>
-    Object.values(matches || {})
-      .filter(value => typeof value === 'object')
-      .filter(Boolean),
 )
 
 export const getChampionById = createSelector(
@@ -52,7 +43,7 @@ export const isEntityFetching = createSelector(
   state => state,
   (_, entity) => entity,
   (state, entity) => {
-    if (entity) return (state[entity] || {}).isFetching
+    if (entity) return (state.entities[entity] || {}).isFetching
     return Object.values(state.entities).some(value => value.isFetching === true)
   },
 )

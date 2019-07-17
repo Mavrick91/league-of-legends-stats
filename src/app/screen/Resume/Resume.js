@@ -2,13 +2,15 @@
 
 import React from 'react'
 import { pick } from 'ramda'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import SimpleCard from 'app/components/SimpleCard'
 import DisplayMatches from 'app/components/DisplayMatches'
 import { useSaga } from 'app/utils/customHooks'
 import * as Api from 'app/api/endpoints'
-import { useSelector } from 'react-redux'
-import { getMatchDetailsSelector, isEntityFetching } from 'app/service/summoner/selector'
+import { isEntityFetching } from 'app/service/summoner/selector'
+import { getMatchDetailsSelector } from 'app/service/matchDetail/selector'
+import WinRateGames from 'app/components/WinRateGames'
 import { SummonerContext } from '../Dashboard'
 
 const Wrapper = styled.div`
@@ -18,6 +20,11 @@ const Wrapper = styled.div`
 
 const LeftSide = styled.div`
   margin-right: 25px;
+`
+
+const RightSide = styled.div`
+  display: flex;
+  flex-direction: column;
 `
 
 function Resume() {
@@ -31,7 +38,7 @@ function Resume() {
 
   useSaga('match', Api.getMatchbyId, gameIds)
 
-  if (isFetchingMatch) return null
+  if (isFetchingMatch) return <div>Loading...</div>
 
   return (
     <Wrapper>
@@ -48,7 +55,10 @@ function Resume() {
           {...pick(['tier', 'rank', 'leaguePoints', 'wins', 'losses'], rankedFlex)}
         />
       </LeftSide>
-      <DisplayMatches matchDetails={matchDetails} summoner={summoner} />
+      <RightSide>
+        <WinRateGames matchDetails={matchDetails} summoner={summoner} />
+        <DisplayMatches matchDetails={matchDetails} summoner={summoner} />
+      </RightSide>
     </Wrapper>
   )
 }
