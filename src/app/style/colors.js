@@ -11,6 +11,7 @@ export default {
   black12: '#879292',
   black11: '#555e5e',
   black10: '#242929',
+  black9: '#333333',
   black: '#000000',
 
   blue: '#1f8ecd',
@@ -21,4 +22,6 @@ export default {
   red: '#c6443e',
   red1: '#e2b6b3',
   red2: '#cea7a7',
+
+  green: '#2daf7f',
 }

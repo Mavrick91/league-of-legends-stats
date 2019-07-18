@@ -3,6 +3,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import RatioGame from './RatioGame'
+import RatioChamp from './RatioChamp'
 
 type Props = {
   matchDetails: Array<MatchDetailType>,
@@ -26,6 +27,7 @@ const Header = styled.div`
 
 const Content = styled.div`
   ${({ theme: { colors } }) => css`
+    display: flex;
     border: 1px solid ${colors.white3};
     box-shadow: 0 1px ${colors.white2};
     background: ${colors.white1};
@@ -40,6 +42,7 @@ function WinRateGames({ matchDetails, summoner }: Props) {
       <Header>Header</Header>
       <Content>
         <RatioGame matchDetails={matchDetails} summoner={summoner} />
+        <RatioChamp matchDetails={matchDetails} summoner={summoner} />
       </Content>
     </Wrapper>
   )

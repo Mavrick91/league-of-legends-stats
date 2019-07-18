@@ -23,6 +23,10 @@ export const getMatchListsSelector = createSelector(
   matchLists => matchLists,
 )
 
+export const getAllChampionsSelector = createSelector(
+  getListChampions,
+  allChamps => allChamps,
+)
 export const getChampionById = createSelector(
   getListChampions,
   (_, championId) => championId,
@@ -43,7 +47,7 @@ export const isEntityFetching = createSelector(
   state => state,
   (_, entity) => entity,
   (state, entity) => {
-    if (entity) return (state.entities[entity] || {}).isFetching
+    if (entity) return (state.entities[entity] || {}).isFetching !== false
     return Object.values(state.entities).some(value => value.isFetching === true)
   },
 )
