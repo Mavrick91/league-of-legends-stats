@@ -26,18 +26,20 @@ const Border = styled.div`
 `
 
 const SummonerLevel = styled.span`
-  position: absolute;
-  bottom: -10px;
-  transform: translateX(-50%);
-  left: 50%;
-  text-align: center;
-  background-image: url('https://opgg-static.akamaized.net/images/site/summoner/bg-levelbox.png');
-  width: 44px;
-  height: 24px;
-  line-height: 24px;
-  color: #eabd56;
-  font-size: 14px;
-  font-family: 'Helvetica', serif;
+  ${({ theme: { colors } }) => css`
+    position: absolute;
+    bottom: -10px;
+    transform: translateX(-50%);
+    left: 50%;
+    text-align: center;
+    background-image: url('https://opgg-static.akamaized.net/images/site/summoner/bg-levelbox.png');
+    width: 44px;
+    height: 24px;
+    line-height: 24px;
+    color: ${colors.yellow};
+    font-size: 14px;
+    font-family: 'Helvetica', serif;
+  `}
 `
 
 const Icon = styled.img`

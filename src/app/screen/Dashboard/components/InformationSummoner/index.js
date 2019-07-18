@@ -30,30 +30,23 @@ const Name = styled.div`
 `
 
 const Rank = styled.div`
-  color: #555e5e;
-  font-size: 11px;
-  text-decoration: none;
-  line-height: 1.5;
+  ${({ theme: { colors } }) => css`
+    color: ${colors.black11};
+    font-size: 11px;
+    text-decoration: none;
+    line-height: 1.5;
 
-  & > span {
-    color: #059ede;
-    font-weight: bold;
-  }
+    & > span {
+      color: ${colors.blue4};
+      font-weight: bold;
+    }
+  `}
 `
 
-function InformationSummoner({
-  profileIconId,
-  name,
-  summonerLevel,
-  tier,
-}: Props) {
+function InformationSummoner({ profileIconId, name, summonerLevel, tier }: Props) {
   return (
     <Wrapper>
-      <ProfileIcon
-        profileIconId={profileIconId}
-        summonerLevel={summonerLevel}
-        tier={tier}
-      />
+      <ProfileIcon profileIconId={profileIconId} summonerLevel={summonerLevel} tier={tier} />
       <NameAndRank>
         <Name>{name}</Name>
         <Rank>

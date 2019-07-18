@@ -33,10 +33,7 @@ describe('SimpleCard', () => {
 
     it('should display the emblem', () => {
       const { container } = getContainer()
-      expect(container.querySelector('img')).toHaveAttribute(
-        'src',
-        'silver.png',
-      )
+      expect(container.querySelector('img')).toHaveAttribute('src', 'silver.png')
     })
 
     it('should display the rank', () => {
@@ -68,9 +65,7 @@ describe('SimpleCard', () => {
   describe('When showLeague is false', () => {
     it('should not display league name', () => {
       const { container } = getContainer({ showLeague: false })
-      expect(
-        container.querySelector('fake league name'),
-      ).not.toBeInTheDocument()
+      expect(container.querySelector('fake league name')).not.toBeInTheDocument()
     })
   })
 })

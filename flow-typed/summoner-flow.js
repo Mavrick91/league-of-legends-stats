@@ -262,7 +262,8 @@ declare type MatchDetailType = {
   gameVersion: string,
   gameMode: string,
   gameType: string,
-  teams: $ReadOnly<TeamType>,
-  participants: $ReadOnly<ParticipantType>,
-  participantIdentities: $ReadOnly<ParticipantIdentityType>,
+  teams: Array<TeamType>,
+  participants: Array<ParticipantType>,
+  participantIdentities: Array<ParticipantIdentityType>,
+  lane?: string
 }

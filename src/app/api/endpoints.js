@@ -1,8 +1,4 @@
-import customAxios, {
-  CHAMPION_VERSION,
-  ITEM_VERSION,
-  SUMMONER_VERSION,
-} from './config'
+import customAxios, { CHAMPION_VERSION, ITEM_VERSION, SUMMONER_VERSION } from './config'
 
 /* -------------- SUMMONER -------------- */
 

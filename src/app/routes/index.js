@@ -7,11 +7,7 @@ import Dashboard from 'app/screen/Dashboard'
 export default () => (
   <Router history={history}>
     <Switch>
-      <Route
-        exact
-        path={['/dashboard/:summonerName', '/dashboard']}
-        component={Dashboard}
-      />
+      <Route exact path={['/dashboard/:summonerName', '/dashboard']} component={Dashboard} />
       <Route exact path="/" component={Home} />
     </Switch>
   </Router>

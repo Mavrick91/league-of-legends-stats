@@ -24,11 +24,7 @@ function Dashboard({ summoner, rankedSolo }: Props) {
         tier={rankedSolo.tier}
       />
       <AppBar position="static">
-        <Tabs
-          component="div"
-          value={valueTab}
-          onChange={(_, newValue) => setValueTab(newValue)}
-        >
+        <Tabs component="div" value={valueTab} onChange={(_, newValue) => setValueTab(newValue)}>
           <Tab label="Item One" href={null} />
           <Tab label="Item Two" href={null} />
           <Tab label="Item Three" href={null} />
