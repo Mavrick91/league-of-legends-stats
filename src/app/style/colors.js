@@ -18,10 +18,14 @@ export default {
   blue1: '#a3cfec',
   blue2: '#99b9cf',
   blue3: '#1a78ae',
+  blue4: '#059ede',
 
   red: '#c6443e',
   red1: '#e2b6b3',
   red2: '#cea7a7',
 
   green: '#2daf7f',
+
+  yellow: '#eabd56',
+  yellow1: '#c8aa6e',
 }

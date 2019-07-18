@@ -46,24 +46,28 @@ const Text = styled.div`
   margin-left: 4px;
 
   & > span:nth-child(1) {
-    line-height: 16px;
-    font-size: 14px;
-    color: #333;
+    ${({ theme: { colors } }) => css`
+      line-height: 16px;
+      font-size: 14px;
+      color: ${colors.black9};
+    `}
   }
 `
 
 const PercentageWin = styled.div`
-  line-height: 16px;
-  margin-bottom: 4px;
-  font-size: 11px;
+  ${({ theme: { colors } }) => css`
+    line-height: 16px;
+    margin-bottom: 4px;
+    font-size: 11px;
 
-  & > span:nth-child(1) {
-    color: #c8aa6e;
-  }
+    & > span:nth-child(1) {
+      color: ${colors.yellow1};
+    }
 
-  & ~ :last-child {
-    font-weight: bolder;
-  }
+    & ~ :last-child {
+      font-weight: bolder;
+    }
+  `}
 `
 
 function RatioLane({ matchDetails, matchLists, summoner }: Props) {

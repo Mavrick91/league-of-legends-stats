@@ -28,15 +28,17 @@ const ImageChampion = styled.div`
 `
 
 const SummonerName = styled.span`
-  display: inline-block;
-  max-width: 60px;
-  vertical-align: middle;
-  font-size: 11px;
-  color: #555;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  margin-left: 4px;
+  ${({ theme: { colors } }) => css`
+    display: inline-block;
+    max-width: 60px;
+    vertical-align: middle;
+    font-size: 11px;
+    color: ${colors.black13};
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-left: 4px;
+  `}
 `
 
 function ParticipantRow({ championId, player }: Props) {
