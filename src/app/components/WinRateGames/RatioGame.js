@@ -158,4 +158,4 @@ function RatioGame({ matchDetails, summoner }: Props) {
   )
 }
 
-export default RatioGame
+export default React.memo<Props>(RatioGame)

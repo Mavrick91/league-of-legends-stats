@@ -265,4 +265,5 @@ declare type MatchDetailType = {
   teams: Array<TeamType>,
   participants: Array<ParticipantType>,
   participantIdentities: Array<ParticipantIdentityType>,
+  lane?: string
 }

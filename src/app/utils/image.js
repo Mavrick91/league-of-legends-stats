@@ -9,6 +9,12 @@ import grandmaster from 'app/ressources/images/emblems/grandmaster.png'
 import gold from 'app/ressources/images/emblems/gold.png'
 import defaultEmblem from 'app/ressources/images/default.png'
 
+import topLane from 'app/ressources/images/lanes/top_lane.png'
+import jungleLane from 'app/ressources/images/lanes/jungle_lane.png'
+import midLane from 'app/ressources/images/lanes/mid_lane.png'
+import bottomLane from 'app/ressources/images/lanes/bottom_lane.png'
+import supportLane from 'app/ressources/images/lanes/support_lane.png'
+
 export function getEmblem(tier = '') {
   switch (tier.toLowerCase()) {
     case 'bronze':
@@ -31,5 +37,22 @@ export function getEmblem(tier = '') {
       return gold
     default:
       return defaultEmblem
+  }
+}
+
+export function getLane(lane = '') {
+  switch (lane.toLowerCase()) {
+    case 'top':
+      return topLane
+    case 'jungle':
+      return jungleLane
+    case 'mid':
+      return midLane
+    case 'bottom':
+      return bottomLane
+    case 'support':
+      return supportLane
+    default:
+      return null
   }
 }

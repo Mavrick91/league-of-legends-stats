@@ -56,7 +56,11 @@ function Resume() {
         />
       </LeftSide>
       <RightSide>
-        <WinRateGames matchDetails={matchDetails} summoner={summoner} />
+        <WinRateGames
+          matchDetails={matchDetails}
+          summoner={summoner}
+          matchLists={(matchLists || []).slice(0, 10)}
+        />
         <DisplayMatches matchDetails={matchDetails} summoner={summoner} />
       </RightSide>
     </Wrapper>

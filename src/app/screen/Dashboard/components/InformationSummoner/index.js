@@ -41,19 +41,10 @@ const Rank = styled.div`
   }
 `
 
-function InformationSummoner({
-  profileIconId,
-  name,
-  summonerLevel,
-  tier,
-}: Props) {
+function InformationSummoner({ profileIconId, name, summonerLevel, tier }: Props) {
   return (
     <Wrapper>
-      <ProfileIcon
-        profileIconId={profileIconId}
-        summonerLevel={summonerLevel}
-        tier={tier}
-      />
+      <ProfileIcon profileIconId={profileIconId} summonerLevel={summonerLevel} tier={tier} />
       <NameAndRank>
         <Name>{name}</Name>
         <Rank>

@@ -85,7 +85,7 @@ function RatioChamp({ matchDetails, summoner }: Props) {
         item => item.participantId === myParticipantId,
       ): any)
 
-      const champion = Object.values(allChampions.data).find(
+      const champion = (Object.values(allChampions.data): any).find(
         c => c.key === participant.championId.toString(),
       )
 
@@ -125,7 +125,7 @@ function RatioChamp({ matchDetails, summoner }: Props) {
               <Name>{key}</Name>
               <Stats
                 isAboveSixty={(win / (win + lost)) * 100 >= 60}
-                isAboveThreeKda={kdaDisplay >= 3}
+                isAboveThreeKda={kdaDisplay >= '3'}
               >
                 <span>{`${((win / (win + lost)) * 100).toFixed(0)}%`}</span>
                 <span>{` (${win}V ${lost}D)`}</span>
@@ -139,4 +139,4 @@ function RatioChamp({ matchDetails, summoner }: Props) {
   )
 }
 
-export default RatioChamp
+export default React.memo<Props>(RatioChamp)
