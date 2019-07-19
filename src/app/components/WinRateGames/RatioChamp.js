@@ -79,7 +79,7 @@ function RatioChamp({ matchDetails, summoner }: Props) {
   React.useEffect(() => {
     const tmpStateChamp = matchDetails.reduce((acc, matchDetail) => {
       const { participantId: myParticipantId } = (matchDetail.participantIdentities.find(
-        participantIdentity => participantIdentity.player.summonerId === summoner.id,
+        participantIdentity => participantIdentity.player.summonerId === summoner.summonerIds.id,
       ): any)
       const participant = (matchDetail.participants.find(
         item => item.participantId === myParticipantId,
@@ -94,7 +94,7 @@ function RatioChamp({ matchDetails, summoner }: Props) {
       return acc
     }, {})
     setChampions(tmpStateChamp)
-  }, [allChampions.data, matchDetails, summoner.id])
+  }, [allChampions.data, matchDetails, summoner.summonerIds.id])
 
   if (isEmpty(champions)) return <div>Loading champ rate ...</div>
 
@@ -119,7 +119,10 @@ function RatioChamp({ matchDetails, summoner }: Props) {
         return (
           <StatsChamp key={key}>
             <ImageChamp
-              src={`https://ddragon.leagueoflegends.com/cdn/${CHAMPION_VERSION}/img/champion/${key}.png`}
+              src={`https://ddragon.leagueoflegends.com/cdn/${CHAMPION_VERSION}/img/champion/${key.replace(
+                / /g,
+                '',
+              )}.png`}
             />
             <Content>
               <Name>{key}</Name>

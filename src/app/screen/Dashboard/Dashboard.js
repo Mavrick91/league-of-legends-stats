@@ -18,9 +18,9 @@ function Dashboard({ summoner, rankedSolo }: Props) {
   return (
     <div style={{ padding: '26px' }}>
       <InformationSummoner
-        profileIconId={summoner.profileIconId}
-        name={summoner.name}
-        summonerLevel={summoner.summonerLevel}
+        profileIconId={summoner.summonerIds.profileIconId}
+        name={summoner.summonerIds.name}
+        summonerLevel={summoner.summonerIds.summonerLevel}
         tier={rankedSolo.tier}
       />
       <AppBar position="static">

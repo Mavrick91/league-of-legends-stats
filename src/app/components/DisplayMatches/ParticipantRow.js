@@ -3,7 +3,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { useSelector } from 'react-redux'
-import { getChampionById, getSummonerSelector } from 'app/service/summoner/selector'
+import { getChampionById, getSummonerEntitySelector } from 'app/service/summoner/selector'
 import { CHAMPION_VERSION } from 'app/api/config'
 
 type Props = {
@@ -43,7 +43,7 @@ const SummonerName = styled.span`
 
 function ParticipantRow({ championId, player }: Props) {
   const champion = useSelector(state => getChampionById(state, championId))
-  const summoner = useSelector(getSummonerSelector)
+  const summoner = useSelector(getSummonerEntitySelector)
 
   return (
     <Wrapper>

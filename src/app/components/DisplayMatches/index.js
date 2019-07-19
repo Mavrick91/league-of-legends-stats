@@ -19,7 +19,11 @@ function DisplayMatches({ matchDetails, summoner }: Props) {
   return (
     <Wrapper>
       {matchDetails.map(matchDetail => (
-        <MatchRow key={matchDetail.gameId} matchDetail={matchDetail} summonerId={summoner.id} />
+        <MatchRow
+          key={matchDetail.gameId}
+          matchDetail={matchDetail}
+          summonerId={summoner.summonerIds.id}
+        />
       ))}
     </Wrapper>
   )

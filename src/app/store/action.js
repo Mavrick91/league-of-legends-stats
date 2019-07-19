@@ -1,14 +1,7 @@
 // @flow
 
-type TypeParams = {
-  entityName: string,
-  apiEndpoint: () => void,
-  args: Array<String>,
-}
-
-export const fetchInfo = ({ entityName, apiEndpoint, args }: TypeParams) => ({
-  type: 'ENTITY_REQUEST',
+export const fetchSaga = (entityName: string, payload: {}) => ({
+  type: `${entityName.toUpperCase()}_REQUEST`,
   entityName,
-  apiEndpoint,
-  payload: args,
+  payload,
 })

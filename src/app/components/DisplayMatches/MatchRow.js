@@ -21,7 +21,7 @@ const Wrapper = styled.div`
     display: flex;
     height: 98px;
     background: ${isWin ? colors.blue1 : colors.red1};
-    border-color: ${isWin ? colors.blue2 : colors.red2};
+    border: 1px solid ${isWin ? colors.blue2 : colors.red2};
   `}
 `
 

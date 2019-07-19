@@ -87,7 +87,7 @@ function RatioGame({ matchDetails, summoner }: Props) {
     return matchDetails.reduce(
       (acc, matchDetail) => {
         const { participantId: myParticipantId } = (matchDetail.participantIdentities.find(
-          participantIdentity => participantIdentity.player.summonerId === summoner.id,
+          participantIdentity => participantIdentity.player.summonerId === summoner.summonerIds.id,
         ): any)
         const participant = (matchDetail.participants.find(
           item => item.participantId === myParticipantId,
