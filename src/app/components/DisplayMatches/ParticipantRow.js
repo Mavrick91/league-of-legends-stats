@@ -48,7 +48,7 @@ function ParticipantRow({ championId, player }: Props) {
   return (
     <Wrapper>
       <ImageChampion
-        isRounded={summoner.name === player.summonerName}
+        isRounded={summoner.info.name === player.summonerName}
         imageChampion={champion.image.full}
       />
       <SummonerName>{player.summonerName}</SummonerName>

@@ -4,11 +4,13 @@ import * as Api from 'app/api/endpoints'
 
 export function* fetchAll({ entityName, payload }) {
   const { summonerName } = payload
-  const e = {}
+  const e = {
+    info: {},
+  }
 
   try {
-    e.summonerIds = yield call(fetchEndpoint, Api.getSummonerByName, summonerName)
-    e.myleague = yield call(fetchEndpoint, Api.getSummonerLeague, e.summonerIds.id)
+    e.info = yield call(fetchEndpoint, Api.getSummonerByName, summonerName)
+    e.myleague = yield call(fetchEndpoint, Api.getSummonerLeague, e.info.id)
     e.league = yield call(fetchEndpoint, Api.getSummonerLeagueName, e.myleague[0].leagueId)
     e.allchampions = yield call(fetchEndpoint, Api.getAllChampions)
     e.summonerspells = yield call(fetchEndpoint, Api.getSummonerSpells)

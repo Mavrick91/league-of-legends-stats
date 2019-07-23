@@ -11,7 +11,7 @@ type Props = {
 }
 
 const Wrapper = styled.div`
-  width: 170px;
+  width: 183px;
   display: flex;
   align-items: center;
   justify-content: center;

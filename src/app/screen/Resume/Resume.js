@@ -20,6 +20,10 @@ const Wrapper = styled.div`
 const LeftSide = styled.div`
   margin-right: 8px;
   width: 300px;
+
+  & > div + div {
+    margin-top: 8px;
+  }
 `
 
 const RightSide = styled.div`
@@ -36,8 +40,8 @@ function Resume() {
   const isFetchingMatch = useSelector(state => isEntityFetching(state, 'matches'))
 
   React.useEffect(() => {
-    dispatch(fetchSaga('matches', { accountId: summoner.summonerIds.accountId, champId }))
-  }, [dispatch, champId, summoner.summonerIds.accountId])
+    dispatch(fetchSaga('matches', { accountId: summoner.info.accountId, champId }))
+  }, [dispatch, champId, summoner.info.accountId])
 
   return (
     <Wrapper>

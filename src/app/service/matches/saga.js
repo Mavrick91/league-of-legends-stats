@@ -11,7 +11,6 @@ export function* fetchAll({ entityName, payload }) {
       params: {
         endIndex: 10,
         champion: champId,
-        season: 13,
       },
     })
     const gameIds = e.list.matches.reduce((acc, key) => {

@@ -9,7 +9,9 @@ import { capitalize } from 'app/utils/string'
 type Props = {
   matchDetails: Array<MatchDetailType>,
   matchLists: Array<MatchType>,
-  summoner: SummonerType,
+  summoner: {
+    info: SummonerType,
+  },
 }
 
 const Wrapper = styled.div`
@@ -95,7 +97,7 @@ function RatioLane({ matchDetails, matchLists, summoner }: Props) {
 
   function getStats(acc, matchDetail) {
     const { participantId: myParticipantId } = (matchDetail.participantIdentities.find(
-      participantIdentity => participantIdentity.player.summonerId === summoner.summonerIds.id,
+      participantIdentity => participantIdentity.player.summonerId === summoner.info.id,
     ): any)
     const { stats } = (matchDetail.participants.find(
       item => item.participantId === myParticipantId,

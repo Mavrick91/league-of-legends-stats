@@ -11,7 +11,10 @@ import Header from './Header'
 type Props = {
   matchDetails: Array<MatchDetailType>,
   matchLists: Array<MatchType>,
-  summoner: SummonerType,
+  summoner: {
+    info: SummonerType,
+  },
+
   setChampId: number => void,
   isFetchingMatch: boolean,
 }
@@ -30,7 +33,7 @@ const Content = styled.div`
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
     height: 156px;
-    width: 724px;
+    width: 690px;
   `}
 `
 

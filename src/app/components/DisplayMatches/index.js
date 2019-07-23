@@ -6,7 +6,9 @@ import MatchRow from './MatchRow'
 
 type Props = {
   matchDetails: $ReadOnlyArray<$Exact<MatchDetailType>>,
-  summoner: SummonerType,
+  summoner: {
+    info: SummonerType,
+  },
 }
 
 const Wrapper = styled.div`
@@ -22,7 +24,7 @@ function DisplayMatches({ matchDetails, summoner }: Props) {
         <MatchRow
           key={matchDetail.gameId}
           matchDetail={matchDetail}
-          summonerId={summoner.summonerIds.id}
+          summonerId={summoner.info.id}
         />
       ))}
     </Wrapper>

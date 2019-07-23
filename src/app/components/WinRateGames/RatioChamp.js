@@ -9,7 +9,9 @@ import { CHAMPION_VERSION } from 'app/api/config'
 
 type Props = {
   matchDetails: Array<MatchDetailType>,
-  summoner: SummonerType,
+  summoner: {
+    info: SummonerType,
+  },
 }
 
 const Wrapper = styled.div`
@@ -79,7 +81,7 @@ function RatioChamp({ matchDetails, summoner }: Props) {
   React.useEffect(() => {
     const tmpStateChamp = matchDetails.reduce((acc, matchDetail) => {
       const { participantId: myParticipantId } = (matchDetail.participantIdentities.find(
-        participantIdentity => participantIdentity.player.summonerId === summoner.summonerIds.id,
+        participantIdentity => participantIdentity.player.summonerId === summoner.info.id,
       ): any)
       const participant = (matchDetail.participants.find(
         item => item.participantId === myParticipantId,
@@ -94,7 +96,7 @@ function RatioChamp({ matchDetails, summoner }: Props) {
       return acc
     }, {})
     setChampions(tmpStateChamp)
-  }, [allChampions.data, matchDetails, summoner.summonerIds.id])
+  }, [allChampions.data, matchDetails, summoner.info.id])
 
   if (isEmpty(champions)) return <div>Loading champ rate ...</div>
 

@@ -20,7 +20,11 @@ type Props = {
 
 export const SummonerContext: Object = React.createContext()
 
-function DashboardContainer({ match: { params: { summonerName } } }: Props) {
+function DashboardContainer({
+  match: {
+    params: { summonerName },
+  },
+}: Props) {
   const summoner = useSelector(getSummonerEntitySelector)
   const rankedSolo = useSelector(state => getSoloFlexRanked(state, 'RANKED_SOLO_5x5'))
   const rankedFlex = useSelector(state => getSoloFlexRanked(state, 'RANKED_FLEX_SR'))

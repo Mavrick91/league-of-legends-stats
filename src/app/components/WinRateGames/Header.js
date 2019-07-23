@@ -78,8 +78,8 @@ const ItemChamp = styled.div`
 function Header({ setChampId }: Props) {
   const [champName, setChampName] = React.useState('')
   const [displayList, setDisplayList] = React.useState(false)
-  const refInput = React.useRef(null)
-  const refList = React.useRef(null)
+  const refInput = React.useRef()
+  const refList = React.useRef()
   const allChampions = useSelector(getAllChampionsSelector)
 
   React.useEffect(() => {
@@ -89,12 +89,14 @@ function Header({ setChampId }: Props) {
       if (!displayList) setDisplayList(true)
     }
 
+    // $FlowFixMe
     refInput.current.addEventListener('click', toggleList)
+    // $FlowFixMe
     return () => copyRef.removeEventListener('click', toggleList)
   }, [displayList])
 
   React.useEffect(() => {
-    function handleClickOutside(event) {
+    function handleClickOutside(event: Event) {
       if (
         refList.current &&
         refInput.current &&
@@ -109,7 +111,7 @@ function Header({ setChampId }: Props) {
   }, [displayList])
 
   function displayAllChamp() {
-    const champFiltered = Object.values(allChampions.data).filter(champ =>
+    const champFiltered = (Object.values(allChampions.data): any).filter(champ =>
       champ.name.toLowerCase().includes(champName),
     )
     champFiltered.unshift({ name: 'Tous les champions', key: null })
