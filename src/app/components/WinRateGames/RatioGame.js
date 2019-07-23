@@ -6,7 +6,9 @@ import styled, { css } from 'styled-components'
 
 type Props = {
   matchDetails: Array<MatchDetailType>,
-  summoner: SummonerType,
+  summoner: {
+    info: SummonerType,
+  },
 }
 
 const Wrapper = styled.div`
@@ -87,7 +89,7 @@ function RatioGame({ matchDetails, summoner }: Props) {
     return matchDetails.reduce(
       (acc, matchDetail) => {
         const { participantId: myParticipantId } = (matchDetail.participantIdentities.find(
-          participantIdentity => participantIdentity.player.summonerId === summoner.id,
+          participantIdentity => participantIdentity.player.summonerId === summoner.info.id,
         ): any)
         const participant = (matchDetail.participants.find(
           item => item.participantId === myParticipantId,
@@ -145,9 +147,9 @@ function RatioGame({ matchDetails, summoner }: Props) {
       </GamesDonut>
       <WrapperKda>
         <Kda>
-          <span>{`${nbKills / nbGames} / `}</span>
-          <span>{`${nbDeaths / nbGames}`}</span>
-          <span>{` / ${nbAssists / nbGames}`}</span>
+          <span>{`${(nbKills / nbGames).toFixed(1)} / `}</span>
+          <span>{`${(nbDeaths / nbGames).toFixed(1)}`}</span>
+          <span>{` / ${(nbAssists / nbGames).toFixed(1)}`}</span>
         </Kda>
         <KillParticipation>
           <span>{kdaDisplay}</span>

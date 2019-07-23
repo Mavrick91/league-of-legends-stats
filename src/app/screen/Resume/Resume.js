@@ -2,15 +2,14 @@
 
 import React from 'react'
 import { pick } from 'ramda'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import SimpleCard from 'app/components/SimpleCard'
 import DisplayMatches from 'app/components/DisplayMatches'
-import { useSaga } from 'app/utils/customHooks'
-import * as Api from 'app/api/endpoints'
-import { isEntityFetching } from 'app/service/summoner/selector'
-import { getMatchDetailsSelector } from 'app/service/matchDetail/selector'
+import { getMatchDetailsSelector, getMatchListSelector } from 'app/service/matches/selector'
 import WinRateGames from 'app/components/WinRateGames'
+import { isEntityFetching } from 'app/service/entityFetching/selector'
+import { fetchSaga } from 'app/store/action'
 import { SummonerContext } from '../Dashboard'
 
 const Wrapper = styled.div`
@@ -19,7 +18,12 @@ const Wrapper = styled.div`
 `
 
 const LeftSide = styled.div`
-  margin-right: 25px;
+  margin-right: 8px;
+  width: 300px;
+
+  & > div + div {
+    margin-top: 8px;
+  }
 `
 
 const RightSide = styled.div`
@@ -28,17 +32,16 @@ const RightSide = styled.div`
 `
 
 function Resume() {
-  const { summoner, league, rankedSolo, rankedFlex, matchLists } = React.useContext(SummonerContext)
-  const gameIds = (matchLists || []).slice(0, 10).reduce((acc, key) => {
-    acc.push(key.gameId)
-    return acc
-  }, [])
+  const { summoner, league, rankedSolo, rankedFlex } = React.useContext(SummonerContext)
+  const dispatch = useDispatch()
+  const [champId, setChampId] = React.useState(null)
   const matchDetails = useSelector(getMatchDetailsSelector)
-  const isFetchingMatch = useSelector(state => isEntityFetching(state, 'match'))
+  const matchLists = useSelector(getMatchListSelector)
+  const isFetchingMatch = useSelector(state => isEntityFetching(state, 'matches'))
 
-  useSaga('match', Api.getMatchbyId, gameIds)
-
-  if (isFetchingMatch) return <div>Loading...</div>
+  React.useEffect(() => {
+    dispatch(fetchSaga('matches', { accountId: summoner.info.accountId, champId }))
+  }, [dispatch, champId, summoner.info.accountId])
 
   return (
     <Wrapper>
@@ -59,7 +62,9 @@ function Resume() {
         <WinRateGames
           matchDetails={matchDetails}
           summoner={summoner}
-          matchLists={(matchLists || []).slice(0, 10)}
+          matchLists={matchLists}
+          setChampId={setChampId}
+          isFetchingMatch={isFetchingMatch}
         />
         <DisplayMatches matchDetails={matchDetails} summoner={summoner} />
       </RightSide>

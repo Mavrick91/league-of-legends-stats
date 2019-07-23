@@ -8,7 +8,10 @@ import Resume from 'app/screen/Resume'
 import InformationSummoner from './components/InformationSummoner'
 
 type Props = {
-  summoner: SummonerType,
+  summoner: {
+    info: SummonerType,
+  },
+
   rankedSolo: SoloFlexRanked,
 }
 
@@ -18,9 +21,9 @@ function Dashboard({ summoner, rankedSolo }: Props) {
   return (
     <div style={{ padding: '26px' }}>
       <InformationSummoner
-        profileIconId={summoner.profileIconId}
-        name={summoner.name}
-        summonerLevel={summoner.summonerLevel}
+        profileIconId={summoner.info.profileIconId}
+        name={summoner.info.name}
+        summonerLevel={summoner.info.summonerLevel}
         tier={rankedSolo.tier}
       />
       <AppBar position="static">

@@ -21,7 +21,15 @@ const Wrapper = styled.div`
     display: flex;
     height: 98px;
     background: ${isWin ? colors.blue1 : colors.red1};
-    border-color: ${isWin ? colors.blue2 : colors.red2};
+    border: 1px solid ${isWin ? colors.blue2 : colors.red2};
+  `}
+`
+
+const Expand = styled.div`
+  ${({ isWin, theme: { colors } }) => css`
+    width: 30px;
+    background: ${isWin ? colors.blue5 : colors.red4};
+    border: 1px solid ${isWin ? colors.blue6 : colors.red3};
   `}
 `
 
@@ -110,6 +118,7 @@ function MatchRow({ matchDetail, summonerId }: Props) {
         participants={(Object.values(matchDetail.participants): any)}
         participantIdentities={(Object.values(matchDetail.participantIdentities): any)}
       />
+      <Expand isWin={isWin} />
     </Wrapper>
   )
 }

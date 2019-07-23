@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react'
+import { isEmpty } from 'ramda'
 import styled, { css } from 'styled-components'
 import { getLane } from 'app/utils/image'
 import { capitalize } from 'app/utils/string'
@@ -8,7 +9,9 @@ import { capitalize } from 'app/utils/string'
 type Props = {
   matchDetails: Array<MatchDetailType>,
   matchLists: Array<MatchType>,
-  summoner: SummonerType,
+  summoner: {
+    info: SummonerType,
+  },
 }
 
 const Wrapper = styled.div`
@@ -94,7 +97,7 @@ function RatioLane({ matchDetails, matchLists, summoner }: Props) {
 
   function getStats(acc, matchDetail) {
     const { participantId: myParticipantId } = (matchDetail.participantIdentities.find(
-      participantIdentity => participantIdentity.player.summonerId === summoner.id,
+      participantIdentity => participantIdentity.player.summonerId === summoner.info.id,
     ): any)
     const { stats } = (matchDetail.participants.find(
       item => item.participantId === myParticipantId,
@@ -112,6 +115,8 @@ function RatioLane({ matchDetails, matchLists, summoner }: Props) {
       {mainLane && (
         <Container>
           {mainLane.map((matches: Array<MatchDetailType>) => {
+            if (isEmpty(matches)) return null
+
             const { lane, win } = matches.reduce(getStats, { lane: null, win: 0 })
 
             return (

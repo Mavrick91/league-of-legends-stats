@@ -26,10 +26,10 @@ export function getItems() {
   return customAxios.get(`/cdn/${ITEM_VERSION}/data/en_US/item.json `)
 }
 
-export function getMatchList(encryptedAccountId) {
-  return customAxios.get(`/lol/match/v4/matchlists/by-account/${encryptedAccountId}`)
+export function getMatchList(encryptedAccountId, params) {
+  return customAxios.get(`/lol/match/v4/matchlists/by-account/${encryptedAccountId}`, params)
 }
 
-export function getMatchbyId(matchId) {
+export function getMatchById(matchId) {
   return customAxios.get(`/lol/match/v4/matches/${matchId}`)
 }
