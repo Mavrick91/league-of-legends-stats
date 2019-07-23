@@ -5,6 +5,8 @@ export default {
   white1: '#f2f2f2',
   white: '#ffffff',
 
+  gray: '#eaeaea',
+
   black15: '#666666',
   black14: '#353a3a',
   black13: '#555555',
