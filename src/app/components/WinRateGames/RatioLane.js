@@ -126,7 +126,7 @@ function RatioLane({ matchDetails, matchLists, summoner }: Props) {
                   <span>{capitalize(lane)}</span>
                   <PercentageWin>
                     <span>
-                      <b>{`${(matches.length / matchDetails.length) * 100}%`}</b>
+                      <b>{`${((matches.length / matchDetails.length) * 100).toFixed(0)}%`}</b>
                     </span>
                     <span> | Win Ratio </span>
                     <b>{`${((win / matches.length) * 100).toFixed(0)}%`}</b>

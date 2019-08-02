@@ -1,11 +1,12 @@
 export default {
+  white5: '#c6cbcb',
   white4: '#ededed',
   white3: '#cdd2d2',
   white2: '#dcdfdf',
   white1: '#f2f2f2',
   white: '#ffffff',
 
-  gray: '#eaeaea',
+  gray: '#eaeaeaea',
 
   black15: '#666666',
   black14: '#353a3a',
