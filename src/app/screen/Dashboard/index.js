@@ -10,12 +10,14 @@ import {
 } from 'app/service/summoner/selector'
 import { fetchSaga } from 'app/store/action'
 import { hasEntityError, isEntityFetching } from 'app/service/entityFetching/selector'
+import LoaderCustom from 'app/components/LoaderCustom'
 import Dashboard from './Dashboard'
 
 type Props = {
   match: {
     params: { summonerName?: string },
   },
+  history: { push: (*) => void },
 }
 
 export const SummonerContext: Object = React.createContext()
@@ -24,6 +26,7 @@ function DashboardContainer({
   match: {
     params: { summonerName },
   },
+  history,
 }: Props) {
   const summoner = useSelector(getSummonerEntitySelector)
   const rankedSolo = useSelector(state => getSoloFlexRanked(state, 'RANKED_SOLO_5x5'))
@@ -39,7 +42,7 @@ function DashboardContainer({
   const entityError = useSelector(state => hasEntityError(state, 'summoner'))
 
   if (!summonerName) return <Redirect to="/" />
-  if (isFetching) return <div>Loading...</div>
+  if (isFetching) return <LoaderCustom />
   if (entityError) return <div>{`Error while fetching: ${entityError}`}</div>
 
   return (
@@ -51,7 +54,7 @@ function DashboardContainer({
         rankedFlex,
       }}
     >
-      <Dashboard summoner={summoner} rankedSolo={rankedSolo} />
+      <Dashboard summoner={summoner} rankedSolo={rankedSolo} history={history} />
     </SummonerContext.Provider>
   )
 }
