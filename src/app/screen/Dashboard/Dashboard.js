@@ -4,14 +4,15 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import Resume from 'app/screen/Resume'
 import MainTabs from 'app/components/Tabs/Tabs'
+import ResearchBar from 'app/components/ResearchBar'
 import InformationSummoner from './components/InformationSummoner'
 
 type Props = {
   summoner: {
     info: SummonerType,
   },
-
   rankedSolo: SoloFlexRanked,
+  history: { push: (*) => void },
 }
 
 const Wrapper = styled.div`
@@ -28,11 +29,12 @@ const Content = styled.div`
   padding-top: 50px;
 `
 
-function Dashboard({ summoner, rankedSolo }: Props) {
+function Dashboard({ summoner, rankedSolo, history }: Props) {
   const [activeTab, setActiveTab] = React.useState(0)
 
   return (
     <Wrapper>
+      <ResearchBar history={history} />
       <Content>
         <InformationSummoner
           profileIconId={summoner.info.profileIconId}
