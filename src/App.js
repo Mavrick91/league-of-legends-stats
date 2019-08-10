@@ -10,6 +10,8 @@ import { Provider } from 'react-redux'
 import store, { history } from 'app/store'
 
 function App() {
+  const test = ''
+
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
