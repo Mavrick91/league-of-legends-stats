@@ -5,3 +5,8 @@ export const fetchSaga = (entityName: string, payload: {}) => ({
   entityName,
   payload,
 })
+
+export const resetEntity = (entityName: string) => ({
+  type: 'ENTITY_RESET',
+  entityName,
+})

@@ -9,7 +9,7 @@ import DisplayMatches from 'app/components/DisplayMatches'
 import { getMatchDetailsSelector, getMatchListSelector } from 'app/service/matches/selector'
 import WinRateGames from 'app/components/WinRateGames'
 import { isEntityFetching } from 'app/service/entityFetching/selector'
-import { fetchSaga } from 'app/store/action'
+import { fetchSaga, resetEntity } from 'app/store/action'
 import { SummonerContext } from '../Dashboard'
 
 const Wrapper = styled.div`
@@ -41,6 +41,7 @@ function Resume() {
 
   React.useEffect(() => {
     dispatch(fetchSaga('matches', { accountId: summoner.info.accountId, champId }))
+    return () => dispatch(resetEntity('matches'))
   }, [dispatch, champId, summoner.info.accountId])
 
   return (

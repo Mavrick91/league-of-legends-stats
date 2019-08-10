@@ -5,11 +5,13 @@ import styled, { css } from 'styled-components'
 import Resume from 'app/screen/Resume'
 import MainTabs from 'app/components/Tabs/Tabs'
 import ResearchBar from 'app/components/ResearchBar'
+import SummonerNotFound from 'app/screen/SummonerNotFound'
 import InformationSummoner from './components/InformationSummoner'
 
 type Props = {
   summoner: {
     info: SummonerType,
+    error?: string,
   },
   rankedSolo: SoloFlexRanked,
   history: { push: (*) => void },
@@ -35,16 +37,20 @@ function Dashboard({ summoner, rankedSolo, history }: Props) {
   return (
     <Wrapper>
       <ResearchBar history={history} />
-      <Content>
-        <InformationSummoner
-          profileIconId={summoner.info.profileIconId}
-          name={summoner.info.name}
-          summonerLevel={summoner.info.summonerLevel}
-          tier={rankedSolo.tier}
-        />
-        <MainTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-        {activeTab === 0 && <Resume />}
-      </Content>
+      {summoner.error ? (
+        <SummonerNotFound history={history} />
+      ) : (
+        <Content>
+          <InformationSummoner
+            profileIconId={summoner.info.profileIconId}
+            name={summoner.info.name}
+            summonerLevel={summoner.info.summonerLevel}
+            tier={rankedSolo.tier}
+          />
+          <MainTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+          {activeTab === 0 && <Resume />}
+        </Content>
+      )}
     </Wrapper>
   )
 }

@@ -9,7 +9,7 @@ import {
   getSummonerEntitySelector,
 } from 'app/service/summoner/selector'
 import { fetchSaga } from 'app/store/action'
-import { hasEntityError, isEntityFetching } from 'app/service/entityFetching/selector'
+import { isEntityFetching } from 'app/service/entityFetching/selector'
 import LoaderCustom from 'app/components/LoaderCustom'
 import Dashboard from './Dashboard'
 
@@ -39,11 +39,9 @@ function DashboardContainer({
   }, [dispatch, summonerName])
 
   const isFetching = useSelector(state => isEntityFetching(state, 'summoner'))
-  const entityError = useSelector(state => hasEntityError(state, 'summoner'))
 
   if (!summonerName) return <Redirect to="/" />
   if (isFetching) return <LoaderCustom />
-  if (entityError) return <div>{`Error while fetching: ${entityError}`}</div>
 
   return (
     <SummonerContext.Provider

@@ -98,8 +98,6 @@ function RatioChamp({ matchDetails, summoner }: Props) {
     setChampions(tmpStateChamp)
   }, [allChampions.data, matchDetails, summoner.info.id])
 
-  if (isEmpty(champions)) return <div>Loading champ rate ...</div>
-
   return (
     <Wrapper>
       {Object.keys(champions).map(key => {
@@ -117,14 +115,12 @@ function RatioChamp({ matchDetails, summoner }: Props) {
         )
         const kda = ((kills + assists) / deaths).toFixed(2)
         const kdaDisplay = kda === 'Infinity' ? 'Perfect ' : `${kda}`
+        const champName = key.replace(/ /g, '').replace(/\./g, '')
 
         return (
           <StatsChamp key={key}>
             <ImageChamp
-              src={`https://ddragon.leagueoflegends.com/cdn/${CHAMPION_VERSION}/img/champion/${key.replace(
-                / /g,
-                '',
-              )}.png`}
+              src={`https://ddragon.leagueoflegends.com/cdn/${CHAMPION_VERSION}/img/champion/${champName}.png`}
             />
             <Content>
               <Name>{key}</Name>
