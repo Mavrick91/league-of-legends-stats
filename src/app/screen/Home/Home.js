@@ -7,7 +7,8 @@ import styled, { css } from 'styled-components'
 import type { formPropTypes } from 'redux-form'
 import TextFieldInput from 'app/components/TextField'
 import banner from 'app/ressources/images/banner_home.png'
-import RecentPlayers from './RecentPlayers'
+import ListPlayers from './ListPlayers'
+import Tabs from './Tabs'
 
 const Wrapper = styled.div`
   ${({ theme: { colors } }) => css`
@@ -15,9 +16,14 @@ const Wrapper = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    background-color: ${colors.yellow1};
+    background-color: ${colors.purple};
     height: 100%;
   `}
+`
+
+const Container = styled.div`
+  width: 624px;
+  text-align: center;
 `
 
 const Banner = styled.img`
@@ -25,59 +31,73 @@ const Banner = styled.img`
   margin: 32px 0;
 `
 
+const Shadow = styled.div`
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+`
+
 const InputStyled = styled(TextFieldInput)`
   &&& {
     ${({ theme: { colors } }) => css`
       height: 50px;
-      width: 624px;
+      width: 100%;
       background: ${colors.white};
       padding: 15px 150px 18px 17px;
       border: none;
       line-height: 17px;
       font-size: 14px;
-      color: #9b9b9b;
-      box-sizing: border-box;
+      color: ${colors.white6};
       outline: none;
-      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.19);
     `}
   }
 `
 
+export const separator = '-_-'
+
 function Home({ handleSubmit, history }: formPropTypes) {
   const [cookies, setCookie] = useCookies()
+  const [activeTab, setActiveTab] = React.useState(0)
   const [showList, setShowList] = React.useState(false)
-  const [recentPlayers, setRecentPlayer] = React.useState([])
-  const separator = '$_$separator$_$'
+  const [players, setPlayers] = React.useState([])
 
   React.useEffect(() => {
-    const allPlayer = (cookies.recentsPlayer || '').split(separator)
-    allPlayer.pop()
+    let allPLayers = []
 
-    setRecentPlayer(allPlayer)
-  }, [cookies.recentsPlayer])
+    if (activeTab === 0) allPLayers = (cookies.recentPlayers || '').split(separator)
+    else allPLayers = (cookies.favoritePlayers || '').split(separator)
+
+    allPLayers.pop()
+
+    setPlayers(allPLayers.filter(Boolean).reverse())
+  }, [cookies.recentPlayers, cookies.favoritePlayers, activeTab])
 
   function onSubmit(value) {
-    if (recentPlayers.length <= 9 && !recentPlayers.includes(value.summonerName))
-      setCookie('recentsPlayer', `${cookies.recentsPlayer || ''}${value.summonerName}${separator}`)
+    if (players.length <= 9 && !players.includes(value.summonerName))
+      setCookie('recentPlayers', `${cookies.recentPlayers || ''}${value.summonerName}${separator}`)
 
     history.push(`/dashboard/${value.summonerName}`)
   }
 
   return (
     <Wrapper>
-      <Banner src={banner} />
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <InputStyled
-          name="summonerName"
-          placeholder="Summoner name ..."
-          autoComplete="off"
-          onFocus={() => setShowList(true)}
-          onBlur={() => setShowList(false)}
-        />
-      </Form>
-      {showList && (
-        <RecentPlayers players={recentPlayers.filter(Boolean).reverse()} separator={separator} />
-      )}
+      <Container>
+        <Banner src={banner} />
+        <Shadow>
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            <InputStyled
+              name="summonerName"
+              placeholder="Summoner name ..."
+              autoComplete="off"
+              onFocus={() => setShowList(true)}
+            />
+          </Form>
+          {showList && (
+            <>
+              <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
+              <ListPlayers activeTab={activeTab} players={players} separator={separator} />
+            </>
+          )}
+        </Shadow>
+      </Container>
     </Wrapper>
   )
 }

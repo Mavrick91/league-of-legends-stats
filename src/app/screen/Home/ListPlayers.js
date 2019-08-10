@@ -2,40 +2,43 @@
 
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { Link } from 'react-router-dom'
 import Info from 'app/ressources/images/svg/info'
+import Star from 'app/ressources/images/svg/star'
 import Clear from 'app/ressources/images/svg/clear'
 import { useCookies } from 'react-cookie'
 
 type Props = {
   players: Array<string>,
   separator: string,
+  activeTab: number,
 }
 
 const Wrapper = styled.div`
   ${({ theme: { colors } }) => css`
     min-height: 56px;
     background-color: ${colors.white};
-    width: 624px;
     border-bottom-right-radius: 2px;
     border-bottom-left-radius: 2px;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
     display: flex;
   `}
 `
 
 const NoRecent = styled.div`
-  padding: 20px;
-  line-height: 15px;
-  font-size: 12px;
-  color: #666;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+  ${({ theme: { colors } }) => css`
+    padding: 20px;
+    line-height: 15px;
+    font-size: 12px;
+    color: ${colors.black15};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 
-  & > :first-child {
-    margin-right: 8px;
-  }
+    & > :first-child {
+      margin-right: 8px;
+    }
+  `}
 `
 
 const Recent = styled.div`
@@ -45,7 +48,7 @@ const Recent = styled.div`
   flex-wrap: wrap;
 `
 
-const Item = styled.div`
+const LinkStyled = styled(Link)`
   ${({ theme: { colors } }) => css`
     width: 200px;
     margin-top: 15px;
@@ -55,6 +58,7 @@ const Item = styled.div`
     align-items: center;
     justify-content: space-between;
     color: ${colors.black15};
+    text-decoration: none;
 
     & > :first-child {
       cursor: pointer;
@@ -65,27 +69,41 @@ const Item = styled.div`
   `}
 `
 
-function RecentPlayers({ players, separator }: Props) {
+function ListPlayers({ players, separator, activeTab }: Props) {
   const [cookies, setCookie] = useCookies()
 
   function removePlayerFromCookies(player) {
-    setCookie('recentsPlayer', cookies.recentsPlayer.replace(`${player}${separator}`, ''))
+    const cookieName = activeTab === 0 ? 'recentPlayers' : 'favoritePlayers'
+
+    setCookie(cookieName, cookies[cookieName].replace(`${player}${separator}`, ''))
   }
+
+  const noRecent =
+    activeTab === 0 ? (
+      <>
+        <Info height={16} width={16} fill="#666" />
+        There is no summoner you have seen recently.
+      </>
+    ) : (
+      <>
+        <Info height={16} width={16} fill="#666" />
+        <span>Add your </span>
+        <Star height={16} width={16} fill="#666" />
+        <span> favorite summoner for easy updates on the latest stats.</span>
+      </>
+    )
 
   return (
     <Wrapper>
       {players.length === 0 ? (
-        <NoRecent>
-          <Info height={16} width={16} fill="#666" />
-          There is no summoner you have seen recently.
-        </NoRecent>
+        <NoRecent>{noRecent}</NoRecent>
       ) : (
         <Recent>
           {players.map(player => (
-            <Item key={player}>
+            <LinkStyled key={player} to={`/dashboard/${player}`}>
               <span>{player}</span>
               <Clear height={16} width={16} onClick={() => removePlayerFromCookies(player)} />
-            </Item>
+            </LinkStyled>
           ))}
         </Recent>
       )}
@@ -93,4 +111,4 @@ function RecentPlayers({ players, separator }: Props) {
   )
 }
 
-export default RecentPlayers
+export default ListPlayers

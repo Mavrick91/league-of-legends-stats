@@ -10,7 +10,7 @@ type Props = {
 const Wrapper = styled.div`
   ${({ theme: { colors } }) => css`
     height: 48px;
-    background-color: ${colors.yellow1};
+    background-color: ${colors.purple};
     display: flex;
     align-items: center;
     justify-content: flex-end;
