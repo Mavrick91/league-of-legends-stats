@@ -15,7 +15,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    background-color: ${colors.yellow1};
+    background-color: ${colors.purple};
     height: 100%;
   `}
 `
