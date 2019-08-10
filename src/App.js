@@ -3,6 +3,7 @@
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
 import { ConnectedRouter } from 'connected-react-router'
+import { CookiesProvider } from 'react-cookie'
 import GlobalStyle, { theme } from 'app/style'
 import Routes from 'app/routes'
 import { Provider } from 'react-redux'
@@ -12,12 +13,14 @@ function App() {
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <ThemeProvider theme={theme}>
-          <>
-            <GlobalStyle />
-            <Routes />
-          </>
-        </ThemeProvider>
+        <CookiesProvider>
+          <ThemeProvider theme={theme}>
+            <>
+              <GlobalStyle />
+              <Routes />
+            </>
+          </ThemeProvider>
+        </CookiesProvider>
       </ConnectedRouter>
     </Provider>
   )
