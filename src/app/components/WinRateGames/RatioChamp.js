@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import { isEmpty, has } from 'ramda'
+import { has } from 'ramda'
 import styled, { css } from 'styled-components'
 import { useSelector } from 'react-redux'
 import { getAllChampionsSelector } from 'app/service/summoner/selector'

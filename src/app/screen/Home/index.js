@@ -12,12 +12,7 @@ function validate(value) {
   return error
 }
 
-function onSubmit(value, _, { history }) {
-  history.push(`/dashboard/${value.summonerName}`)
-}
-
 export default reduxForm({
   form: 'home',
   validate,
-  onSubmit,
 })(Home)
