@@ -115,7 +115,7 @@ function RatioChamp({ matchDetails, summoner }: Props) {
         )
         const kda = ((kills + assists) / deaths).toFixed(2)
         const kdaDisplay = kda === 'Infinity' ? 'Perfect ' : `${kda}`
-        const champName = key.replace(/ /g, '').replace(/\./g, '')
+        const champName = key.replace(/ /g, '').replace(/\./g, '').replace(/'/g, '')
 
         return (
           <StatsChamp key={key}>

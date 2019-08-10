@@ -3,10 +3,10 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import Resume from 'app/screen/Resume'
-import MainTabs from 'app/components/Tabs/Tabs'
 import ResearchBar from 'app/components/ResearchBar'
 import SummonerNotFound from 'app/screen/SummonerNotFound'
 import InformationSummoner from './components/InformationSummoner'
+import MainTabs from './Tabs'
 
 type Props = {
   summoner: {
