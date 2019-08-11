@@ -47,7 +47,7 @@ function InfoGame({ champLevel, actualRank, nbMinionsKilled, killParticipation }
       <span>{`${nbMinionsKilled} CS`}</span>
       <KillParticipation>{`C/Tués ${Math.round(killParticipation)}%`}</KillParticipation>
       <span>Tier Average</span>
-      <Rank>{`${capitalize(actualRank, true)}`}</Rank>
+      {actualRank && <Rank>{`${capitalize(actualRank, true)}`}</Rank>}
     </Wrapper>
   )
 }
