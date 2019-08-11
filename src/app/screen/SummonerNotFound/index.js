@@ -1,13 +1,10 @@
 // @flow
 
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 
-type Props = {
-  history: {
-    push: (*) => void,
-  },
-}
+type Props = {}
 
 const Wrapper = styled.h2`
   ${({ theme: { colors } }) => css`
@@ -34,13 +31,15 @@ const SummonerContainer = styled.div`
 
 const Summoner = styled.div`
   margin: 13px 0;
-  text-decoration: underline;
   font-weight: lighter;
+  cursor: pointer;
+`
 
-  &:hover {
+const LinkStyled = styled(Link)`
+  ${({ theme: { colors } }) => css`
     text-decoration: none;
-    cursor: pointer;
-  }
+    color: ${colors.black14};
+  `}
 `
 
 const defaultSummoner = [
@@ -55,17 +54,13 @@ const defaultSummoner = [
   'dat adc tho',
   'Pain',
   'Dessue',
-  'EonisX',
+  'JustRiri',
   'Fettson',
   'regan',
   'Bastia',
 ]
 
-function SummonerNotFound({ history }: Props) {
-  function handleClick(summoner) {
-    history.push(`/dashboard/${summoner}`)
-  }
-
+function SummonerNotFound() {
   return (
     <Wrapper>
       <span>
@@ -73,9 +68,9 @@ function SummonerNotFound({ history }: Props) {
       </span>
       <SummonerContainer>
         {defaultSummoner.map(summoner => (
-          <Summoner key={summoner} onClick={() => handleClick(summoner)}>
-            {summoner}
-          </Summoner>
+          <LinkStyled key={summoner} to={`/dashboard/${summoner}`}>
+            <Summoner>{summoner}</Summoner>
+          </LinkStyled>
         ))}
       </SummonerContainer>
     </Wrapper>

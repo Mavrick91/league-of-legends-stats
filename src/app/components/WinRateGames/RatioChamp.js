@@ -6,6 +6,7 @@ import styled, { css } from 'styled-components'
 import { useSelector } from 'react-redux'
 import { getAllChampionsSelector } from 'app/service/summoner/selector'
 import { CHAMPION_VERSION } from 'app/api/config'
+import { capitalize } from 'app/utils/string'
 
 type Props = {
   matchDetails: Array<MatchDetailType>,
@@ -115,7 +116,16 @@ function RatioChamp({ matchDetails, summoner }: Props) {
         )
         const kda = ((kills + assists) / deaths).toFixed(2)
         const kdaDisplay = kda === 'Infinity' ? 'Perfect ' : `${kda}`
-        const champName = key.replace(/ /g, '').replace(/\./g, '').replace(/'/g, '')
+        const champName = capitalize(
+          key
+            .replace(/Kha'Zix/g, 'Khazix')
+            .replace(/Cho'Gath/g, 'Chogath')
+            .replace(/Kai'Sa/g, 'Kaisa')
+            .replace(/ /g, '')
+            .replace(/\./g, '')
+            .replace(/'/g, ''),
+          false,
+        )
 
         return (
           <StatsChamp key={key}>

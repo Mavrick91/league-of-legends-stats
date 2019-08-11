@@ -38,7 +38,7 @@ function Dashboard({ summoner, rankedSolo, history }: Props) {
     <Wrapper>
       <ResearchBar history={history} />
       {summoner.error ? (
-        <SummonerNotFound history={history} />
+        <SummonerNotFound />
       ) : (
         <Content>
           <InformationSummoner

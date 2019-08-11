@@ -2,6 +2,7 @@
 
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { getChampionById, getSummonerEntitySelector } from 'app/service/summoner/selector'
 import { CHAMPION_VERSION } from 'app/api/config'
@@ -46,13 +47,15 @@ function ParticipantRow({ championId, player }: Props) {
   const summoner = useSelector(getSummonerEntitySelector)
 
   return (
-    <Wrapper>
-      <ImageChampion
-        isRounded={summoner.info.name === player.summonerName}
-        imageChampion={champion.image.full}
-      />
-      <SummonerName>{player.summonerName}</SummonerName>
-    </Wrapper>
+    <Link to={`/dashboard/${player.summonerName}`}>
+      <Wrapper>
+        <ImageChampion
+          isRounded={summoner.info.name === player.summonerName}
+          imageChampion={champion.image.full}
+        />
+        <SummonerName>{player.summonerName}</SummonerName>
+      </Wrapper>
+    </Link>
   )
 }
 

@@ -48,7 +48,7 @@ const Recent = styled.div`
   flex-wrap: wrap;
 `
 
-const LinkStyled = styled(Link)`
+const Container = styled.div`
   ${({ theme: { colors } }) => css`
     width: 200px;
     margin-top: 15px;
@@ -59,12 +59,16 @@ const LinkStyled = styled(Link)`
     justify-content: space-between;
     color: ${colors.black15};
     text-decoration: none;
+    color: ${colors.black15};
 
     & > :first-child {
       cursor: pointer;
+      text-decoration: none;
+      color: ${colors.black15};
     }
     & > :nth-child(2) {
       cursor: pointer;
+      color: ${colors.black15};
     }
   `}
 `
@@ -100,10 +104,19 @@ function ListPlayers({ players, separator, activeTab }: Props) {
       ) : (
         <Recent>
           {players.map(player => (
-            <LinkStyled key={player} to={`/dashboard/${player}`}>
-              <span>{player}</span>
-              <Clear height={16} width={16} onClick={() => removePlayerFromCookies(player)} />
-            </LinkStyled>
+            <Container key={player}>
+              <Link to={`/dashboard/${player}`}>
+                <span>{player}</span>
+              </Link>
+              <Clear
+                height={16}
+                width={16}
+                onClick={e => {
+                  e.stopPropagation()
+                  removePlayerFromCookies(player)
+                }}
+              />
+            </Container>
           ))}
         </Recent>
       )}

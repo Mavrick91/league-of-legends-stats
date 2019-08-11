@@ -64,7 +64,7 @@ const PercentageWin = styled.div`
     font-size: 11px;
 
     & > span:nth-child(1) {
-      color: ${colors.yellow1};
+      color: ${colors.purple};
     }
 
     & ~ :last-child {
