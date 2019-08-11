@@ -10,6 +10,7 @@ export default {
   gray1: '#E3E3E3',
   gray: '#eaeaeaea',
 
+  black19: '#777777',
   black18: '#4A4A4A',
   black17: '#9C9C9C',
   black16: '#727272',

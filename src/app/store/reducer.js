@@ -26,10 +26,7 @@ function entitiesReducer(state = {}, action) {
   }
 
   if (type.endsWith('RESET')) {
-    return {
-      ...state,
-      [entityName]: null,
-    }
+    return {}
   }
 
   return state

@@ -11,7 +11,10 @@ export function* fetchAll({ entityName, payload }) {
   try {
     e.info = yield call(fetchEndpoint, Api.getSummonerByName, summonerName)
     e.myleague = yield call(fetchEndpoint, Api.getSummonerLeague, e.info.id)
-    e.league = yield call(fetchEndpoint, Api.getSummonerLeagueName, e.myleague[0].leagueId)
+    e.league =
+      e.myleague.length >= 1
+        ? yield call(fetchEndpoint, Api.getSummonerLeagueName, e.myleague[0].leagueId)
+        : null
     e.allchampions = yield call(fetchEndpoint, Api.getAllChampions)
     e.summonerspells = yield call(fetchEndpoint, Api.getSummonerSpells)
     e.items = yield call(fetchEndpoint, Api.getItems)
