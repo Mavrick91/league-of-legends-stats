@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react'
+import { isEmpty } from 'ramda'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import {
@@ -8,7 +9,7 @@ import {
   getSoloFlexRanked,
   getSummonerEntitySelector,
 } from 'app/service/summoner/selector'
-import { fetchSaga } from 'app/store/action'
+import { fetchSaga, resetEntity } from 'app/store/action'
 import { isEntityFetching } from 'app/service/entityFetching/selector'
 import LoaderCustom from 'app/components/LoaderCustom'
 import Dashboard from './Dashboard'
@@ -36,12 +37,13 @@ function DashboardContainer({
 
   React.useEffect(() => {
     dispatch(fetchSaga('summoner', { summonerName }))
+    return () => dispatch(resetEntity('summoner'))
   }, [dispatch, summonerName])
 
   const isFetching = useSelector(state => isEntityFetching(state, 'summoner'))
 
   if (!summonerName) return <Redirect to="/" />
-  if (isFetching) return <LoaderCustom />
+  if (isFetching || isEmpty(summoner)) return <LoaderCustom />
 
   return (
     <SummonerContext.Provider
