@@ -6,7 +6,8 @@ import Resume from 'app/screen/Resume'
 import ResearchBar from 'app/components/ResearchBar'
 import SummonerNotFound from 'app/screen/SummonerNotFound'
 import InformationSummoner from './components/InformationSummoner'
-import MainTabs from './Tabs'
+import UnderMaintenance from '../UnderMaintenance'
+import Tabs from './Tabs'
 
 type Props = {
   summoner: {
@@ -47,8 +48,10 @@ function Dashboard({ summoner, rankedSolo, history }: Props) {
             summonerLevel={summoner.info.summonerLevel}
             tier={rankedSolo.tier}
           />
-          <MainTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+          <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
           {activeTab === 0 && <Resume />}
+          {activeTab === 1 && <UnderMaintenance />}
+          {activeTab === 2 && <UnderMaintenance />}
         </Content>
       )}
     </Wrapper>
