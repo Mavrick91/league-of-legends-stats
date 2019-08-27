@@ -6,7 +6,6 @@ import styled, { css } from 'styled-components'
 import { useSelector } from 'react-redux'
 import { getAllChampionsSelector } from 'app/service/summoner/selector'
 import { CHAMPION_VERSION } from 'app/api/config'
-import { capitalize } from 'app/utils/string'
 
 type Props = {
   matchDetails: Array<MatchDetailType>,
@@ -92,8 +91,8 @@ function RatioChamp({ matchDetails, summoner }: Props) {
         c => c.key === participant.championId.toString(),
       )
 
-      if (!has(champion.name, acc) && Object.keys(acc).length <= 2) acc[champion.name] = []
-      if (has(champion.name, acc)) acc[champion.name].push(participant)
+      if (!has(champion.id, acc) && Object.keys(acc).length <= 2) acc[champion.id] = []
+      if (has(champion.id, acc)) acc[champion.id].push(participant)
       return acc
     }, {})
     setChampions(tmpStateChamp)
@@ -116,21 +115,11 @@ function RatioChamp({ matchDetails, summoner }: Props) {
         )
         const kda = ((kills + assists) / deaths).toFixed(2)
         const kdaDisplay = kda === 'Infinity' ? 'Perfect ' : `${kda}`
-        const champName = capitalize(
-          key
-            .replace(/Kha'Zix/g, 'Khazix')
-            .replace(/Cho'Gath/g, 'Chogath')
-            .replace(/Kai'Sa/g, 'Kaisa')
-            .replace(/ /g, '')
-            .replace(/\./g, '')
-            .replace(/'/g, ''),
-          false,
-        )
 
         return (
           <StatsChamp key={key}>
             <ImageChamp
-              src={`https://ddragon.leagueoflegends.com/cdn/${CHAMPION_VERSION}/img/champion/${champName}.png`}
+              src={`https://ddragon.leagueoflegends.com/cdn/${CHAMPION_VERSION}/img/champion/${key}.png`}
             />
             <Content>
               <Name>{key}</Name>

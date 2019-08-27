@@ -21,7 +21,8 @@
     "prefer-destructuring": 0,
     "operator-linebreak": 0,
     "no-empty": 0,
-    "consistent-return": 0
+    "consistent-return": 0,
+    "import/no-cycle": 0
   },
   "env": {
     "browser": true,
