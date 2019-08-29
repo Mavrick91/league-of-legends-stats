@@ -8,6 +8,7 @@ import SummonerNotFound from 'app/screen/SummonerNotFound'
 import InformationSummoner from './components/InformationSummoner'
 import UnderMaintenance from '../UnderMaintenance'
 import Tabs from './Tabs'
+import Champions from '../Champions'
 
 type Props = {
   summoner: {
@@ -50,7 +51,7 @@ function Dashboard({ summoner, rankedSolo, history }: Props) {
           />
           <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
           {activeTab === 0 && <Resume />}
-          {activeTab === 1 && <UnderMaintenance />}
+          {activeTab === 1 && <Champions />}
           {activeTab === 2 && <UnderMaintenance />}
         </Content>
       )}

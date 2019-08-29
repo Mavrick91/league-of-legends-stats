@@ -33,3 +33,7 @@ export function getMatchList(encryptedAccountId, params) {
 export function getMatchById(matchId) {
   return customAxios.get(`/lol/match/v4/matches/${matchId}`)
 }
+
+export function getChampionsMasteries(encryptedSummonerId) {
+  return customAxios.get(`/lol/champion-mastery/v4/champion-masteries/by-summoner/${encryptedSummonerId}`)
+}

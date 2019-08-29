@@ -237,18 +237,20 @@ declare type ParticipantType = {
   },
 }
 
+declare type PlayerType = {
+  platformId: string,
+  accountId: string,
+  summonerName: string,
+  summonerId: string,
+  currentPlatformId: string,
+  currentAccountId: string,
+  matchHistoryUri: string,
+  profileIcon: number,
+}
+
 declare type ParticipantIdentityType = {
   participantId: number,
-  player: {
-    platformId: string,
-    accountId: string,
-    summonerName: string,
-    summonerId: string,
-    currentPlatformId: string,
-    currentAccountId: string,
-    matchHistoryUri: string,
-    profileIcon: number,
-  },
+  player: PlayerType,
 }
 
 declare type MatchDetailType = {
@@ -265,5 +267,5 @@ declare type MatchDetailType = {
   teams: Array<TeamType>,
   participants: Array<ParticipantType>,
   participantIdentities: Array<ParticipantIdentityType>,
-  lane?: string
+  lane?: string,
 }
