@@ -34,7 +34,7 @@ const Content = styled.div`
 `
 
 function Dashboard({ summoner, rankedSolo, history }: Props) {
-  const [activeTab, setActiveTab] = React.useState(1)
+  const [activeTab, setActiveTab] = React.useState(0)
 
   return (
     <Wrapper>

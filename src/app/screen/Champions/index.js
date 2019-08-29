@@ -1,12 +1,15 @@
 // @flow
 
 import React from 'react'
+import { sortBy, prop } from 'ramda'
 import { useDispatch, useSelector } from 'react-redux'
 import styled, { css } from 'styled-components'
 import { fetchSaga } from 'app/store/action'
 import { getChampionsMasteriesSelector } from 'app/service/masteries/selector'
+import Sort from 'app/ressources/images/svg/sort'
 import Champions from './Champions'
 import { SummonerContext } from '../Dashboard'
+import LoaderCustom from '../../components/LoaderCustom'
 
 const Wrapper = styled.table`
   ${({ theme: { colors } }) => css`
@@ -25,37 +28,79 @@ const Wrapper = styled.table`
       background-color: ${colors.white1};
 
       & > th {
-        padding: 10px 30px;
+        padding: 20px 30px;
+        height: 100%;
       }
     }
   `}
 `
 
+const Title = styled.th`
+  & > :nth-child(1) {
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+  & > :nth-child(2) {
+    margin-right: 5px;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+`
+
 function ChampionsContainer() {
   const { summoner } = React.useContext(SummonerContext)
   const dispatch = useDispatch()
-  const championsMasteries = useSelector(getChampionsMasteriesSelector)
+  const tmpChampionsMasteries = useSelector(getChampionsMasteriesSelector)
+  const [championsMasteries, setChampionsMasteries] = React.useState(null)
 
   React.useEffect(() => {
     dispatch(fetchSaga('masteries', { encryptedSummonerId: summoner.info.id }))
   }, [dispatch, summoner.info.id])
 
-  if (championsMasteries.length === 0) return <div>Charge champions masteries</div>
+  if (tmpChampionsMasteries.length === 0) return <LoaderCustom />
 
+  function sortChampionsBy(index) {
+    let baseKey = ''
+
+    if (index === 1) baseKey = 'name'
+    else if (index === 2) baseKey = 'lastPlayTime'
+    else if (index === 3) baseKey = 'championPointsSinceLastLevel'
+    else if (index === 4) baseKey = 'championPoints'
+    else if (index === 5) baseKey = 'championLevel'
+
+    const tmpChampions = sortBy(prop(baseKey))(tmpChampionsMasteries)
+
+    if (baseKey !== 'name') tmpChampions.reverse()
+    setChampionsMasteries(tmpChampions)
+  }
   return (
     <Wrapper>
       <thead>
         <tr>
-          <th>#</th>
-          <th>Champion</th>
-          <th>Last time played</th>
-          <th>Points since last level</th>
-          <th>Champion points</th>
-          <th>Champion level</th>
+          {[
+            '#',
+            'Champion',
+            'Last time played',
+            'Points since last level',
+            'Champion points',
+            'Champion level',
+          ].map((text, index) => (
+            <Title key={text}>
+              <span>{text}</span>
+              {index !== 0 && (
+                <Sort
+                  height={12}
+                  width={12}
+                  fill="#777777"
+                  onClick={() => sortChampionsBy(index)}
+                />
+              )}
+            </Title>
+          ))}
         </tr>
       </thead>
       <tbody>
-        {championsMasteries.map((champion, index) => (
+        {(championsMasteries || tmpChampionsMasteries).map((champion, index) => (
           <Champions champion={champion} index={index} key={champion.championId} />
         ))}
       </tbody>
