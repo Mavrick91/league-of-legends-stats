@@ -8,8 +8,8 @@ import { getChampionById, getSummonerEntitySelector } from 'app/service/summoner
 import { CHAMPION_VERSION } from 'app/api/config'
 
 type Props = {
-  championId: *,
-  player: *,
+  championId: number,
+  player: PlayerType,
 }
 
 const Wrapper = styled.div`

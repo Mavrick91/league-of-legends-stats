@@ -11,7 +11,18 @@ import moment from 'moment'
 import { getLevel } from 'app/utils/image'
 
 type Props = {
-  champion: Array<{}>,
+  champion: {
+    championId: number,
+    championLevel: number,
+    championPoints: number,
+    lastPlayTime: number,
+    championPointsSinceLastLevel: number,
+    championPointsUntilNextLevel: number,
+    chestGranted: boolean,
+    tokensEarned: number,
+    summonerId: string,
+    name: string,
+  },
   index: number,
 }
 
