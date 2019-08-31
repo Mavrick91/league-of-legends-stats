@@ -49,7 +49,7 @@ function Resume() {
       <LeftSide>
         <SimpleCard
           leagueName={league.name}
-          title="Classé Solo"
+          title="Ranked Solo"
           {...pick(['tier', 'rank', 'leaguePoints', 'wins', 'losses'], rankedSolo)}
         />
         <SimpleCard

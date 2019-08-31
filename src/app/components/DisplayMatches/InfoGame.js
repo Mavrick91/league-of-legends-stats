@@ -43,9 +43,9 @@ const Rank = styled.span`
 function InfoGame({ champLevel, actualRank, nbMinionsKilled, killParticipation }: Props) {
   return (
     <Wrapper>
-      <span>{`Niveau ${champLevel}`}</span>
+      <span>{`Level ${champLevel}`}</span>
       <span>{`${nbMinionsKilled} CS`}</span>
-      <KillParticipation>{`C/Tués ${Math.round(killParticipation)}%`}</KillParticipation>
+      <KillParticipation>{`C/Killed ${Math.round(killParticipation)}%`}</KillParticipation>
       <span>Tier Average</span>
       {actualRank && <Rank>{`${capitalize(actualRank, true)}`}</Rank>}
     </Wrapper>

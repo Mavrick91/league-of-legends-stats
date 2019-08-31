@@ -105,7 +105,7 @@ function InformationSummoner({ profileIconId, name, summonerLevel, tier }: Props
         <Rank>
           Rang Ladder
           <span> 1,611,592 </span>
-          (68% meilleurs joueurs)
+          (68% best players)
         </Rank>
       </NameAndRank>
     </Wrapper>
