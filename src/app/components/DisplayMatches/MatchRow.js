@@ -93,9 +93,8 @@ function MatchRow({ matchDetail, summonerId }: Props) {
       <InfoGame
         champLevel={stats.champLevel}
         nbMinionsKilled={
-          stats.neutralMinionsKilledEnemyJungle +
-          stats.neutralMinionsKilledTeamJungle +
-          stats.totalMinionsKilled
+          ((stats.neutralMinionsKilledEnemyJungle || 0) + stats.neutralMinionsKilledTeamJungle ||
+            0) + stats.totalMinionsKilled || 0
         }
         actualRank={highestAchievedSeasonTier}
         killParticipation={((stats.kills + stats.assists) / getTeamEnemyTotalDeath(teamId)) * 100}

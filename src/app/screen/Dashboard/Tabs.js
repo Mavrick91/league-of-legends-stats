@@ -54,7 +54,7 @@ function MainTabs({ activeTab, setActiveTab }: Props) {
   return (
     <Wrapper>
       <WrapperItem>
-        {['Résumé', 'Champions', 'Ligues'].map((label, index) => (
+        {['Resume', 'Champions', 'Ligues'].map((label, index) => (
           <Item key={label} isActive={index === activeTab} onClick={() => setActiveTab(index)}>
             {label}
           </Item>

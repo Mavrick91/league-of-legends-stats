@@ -77,9 +77,8 @@ function Champions({ champion, index }: Props) {
       </ImageChamp>
       <LastTimePlayed>
         {moment(champion.lastPlayTime)
-          .fromNow()
-          .replace('il y a ', '')
-          .replace('un', '1')}
+          .locale('en')
+          .fromNow()}
       </LastTimePlayed>
       <NumberFormat
         value={champion.championPointsSinceLastLevel}

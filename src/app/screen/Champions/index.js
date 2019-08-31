@@ -79,11 +79,11 @@ function ChampionsContainer() {
         <tr>
           {[
             '#',
-            'Champion',
+            'Champions',
             'Last time played',
             'Points since last level',
-            'Champion points',
-            'Champion level',
+            'Champions points',
+            'Champions level',
           ].map((text, index) => (
             <Title key={text}>
               <span>{text}</span>

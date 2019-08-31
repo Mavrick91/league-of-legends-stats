@@ -56,11 +56,11 @@ function Timeline({ isWin, duration, createdDuration, gameMode }: Props) {
       <GameMode>{getGameMode(gameMode)}</GameMode>
       <span>
         {moment(createdDuration)
-          .locale('fr')
+          .locale('en')
           .fromNow()}
       </span>
       <Separator isWin={isWin} />
-      <Win isWin={isWin}>{isWin ? 'Victoire' : 'Défaite'}</Win>
+      <Win isWin={isWin}>{isWin ? 'Victory' : 'Defeat'}</Win>
       {`${momentDuration.minutes()}:${momentDuration.seconds()}`}
     </Wrapper>
   )
