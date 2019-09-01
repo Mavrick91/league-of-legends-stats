@@ -5,7 +5,7 @@ import { has } from 'ramda'
 import styled, { css } from 'styled-components'
 import { useSelector } from 'react-redux'
 import { getAllChampionsSelector } from 'app/service/summoner/selector'
-import { CHAMPION_VERSION } from 'app/api/config'
+import { getVersionsSelector } from 'app/service/versions/selector'
 
 type Props = {
   matchDetails: Array<MatchDetailType>,
@@ -77,6 +77,7 @@ const Stats = styled.div`
 function RatioChamp({ matchDetails, summoner }: Props) {
   const [champions, setChampions] = React.useState({})
   const allChampions = useSelector(getAllChampionsSelector)
+  const versions = useSelector(getVersionsSelector)
 
   React.useEffect(() => {
     const tmpStateChamp = matchDetails.reduce((acc, matchDetail) => {
@@ -119,7 +120,7 @@ function RatioChamp({ matchDetails, summoner }: Props) {
         return (
           <StatsChamp key={key}>
             <ImageChamp
-              src={`https://ddragon.leagueoflegends.com/cdn/${CHAMPION_VERSION}/img/champion/${key}.png`}
+              src={`https://ddragon.leagueoflegends.com/cdn/${versions.champion}/img/champion/${key}.png`}
             />
             <Content>
               <Name>{key}</Name>

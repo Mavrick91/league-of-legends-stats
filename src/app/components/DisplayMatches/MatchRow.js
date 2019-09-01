@@ -4,6 +4,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { useSelector } from 'react-redux'
 import { getChampionById, getSummonerSpellsById } from 'app/service/summoner/selector'
+import { getVersionsSelector } from 'app/service/versions/selector'
 import ChampName from './ChampName'
 import Scoreboard from './Scoreboard'
 import InfoGame from './InfoGame'
@@ -71,6 +72,7 @@ function MatchRow({ matchDetail, summonerId }: Props) {
     highestAchievedSeasonTier,
   } = getParticipantsById(myParticipantId)
   const champion = useSelector(state => getChampionById(state, championId))
+  const versions = useSelector(getVersionsSelector)
   const summonerSpell1 = useSelector(state => getSummonerSpellsById(state, spell1Id))
   const summonerSpell2 = useSelector(state => getSummonerSpellsById(state, spell2Id))
   const isWin = getIsMatchWin(teamId)
@@ -84,6 +86,8 @@ function MatchRow({ matchDetail, summonerId }: Props) {
         gameMode={matchDetail.gameMode}
       />
       <ChampName
+        championVersion={versions.champion}
+        summonerVersion={versions.summoner}
         championImage={champion.image.full}
         championName={champion.name}
         summonerSpell1Image={summonerSpell1.image.full}
@@ -111,8 +115,10 @@ function MatchRow({ matchDetail, summonerId }: Props) {
           { id: 6, item: stats.item5 },
           { id: 7, item: 1 },
         ]}
+        itemVersion={versions.item}
       />
       <Participants
+        championVersion={versions.champion}
         myTeamId={teamId}
         participants={(Object.values(matchDetail.participants): any)}
         participantIdentities={(Object.values(matchDetail.participantIdentities): any)}

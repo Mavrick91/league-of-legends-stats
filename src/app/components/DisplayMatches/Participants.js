@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import ParticipantRow from './ParticipantRow'
 
 type Props = {
+  championVersion: number,
   myTeamId: number,
   participants: $ReadOnlyArray<ParticipantType>,
   participantIdentities: $ReadOnlyArray<ParticipantIdentityType>,
@@ -23,7 +24,7 @@ const Team = styled.div`
   width: 85px;
 `
 
-function Participants({ participants, participantIdentities, myTeamId }: Props) {
+function Participants({ participants, participantIdentities, myTeamId, championVersion }: Props) {
   function getTeam(myTeam) {
     return participants.filter(participant => {
       if (myTeam) return participant.teamId === myTeamId
@@ -41,6 +42,7 @@ function Participants({ participants, participantIdentities, myTeamId }: Props) 
 
           return (
             <ParticipantRow
+              championVersion={championVersion}
               key={teamPlayer.championId}
               championId={teamPlayer.championId}
               player={participantIdentity.player}

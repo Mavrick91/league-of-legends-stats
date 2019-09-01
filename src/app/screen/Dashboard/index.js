@@ -12,6 +12,7 @@ import {
 import { fetchSaga, resetEntity } from 'app/store/action'
 import { isEntityFetching } from 'app/service/entityFetching/selector'
 import LoaderCustom from 'app/components/LoaderCustom'
+import { getVersionsSelector } from 'app/service/versions/selector'
 import Dashboard from './Dashboard'
 
 type Props = {
@@ -33,12 +34,17 @@ function DashboardContainer({
   const rankedSolo = useSelector(state => getSoloFlexRanked(state, 'RANKED_SOLO_5x5'))
   const rankedFlex = useSelector(state => getSoloFlexRanked(state, 'RANKED_FLEX_SR'))
   const league = useSelector(getLeagueSelector)
+  const versions = useSelector(getVersionsSelector)
   const dispatch = useDispatch()
 
   React.useEffect(() => {
-    dispatch(fetchSaga('summoner', { summonerName }))
+    if (versions && versions.isFetching === false) dispatch(fetchSaga('summoner', { summonerName }))
     return () => dispatch(resetEntity('summoner'))
-  }, [dispatch, summonerName])
+  }, [dispatch, summonerName, versions])
+
+  React.useEffect(() => {
+    dispatch(fetchSaga('versions'))
+  }, [dispatch])
 
   const isFetching = useSelector(state => isEntityFetching(state, 'summoner'))
 
