@@ -5,9 +5,9 @@ import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { getChampionById, getSummonerEntitySelector } from 'app/service/summoner/selector'
-import { CHAMPION_VERSION } from 'app/api/config'
 
 type Props = {
+  championVersion: number,
   championId: number,
   player: PlayerType,
 }
@@ -18,8 +18,8 @@ const Wrapper = styled.div`
 `
 
 const ImageChampion = styled.div`
-  ${({ imageChampion, isRounded }) => css`
-  background-image: url("https://ddragon.leagueoflegends.com/cdn/${CHAMPION_VERSION}/img/champion/${imageChampion}");
+  ${({ imageChampion, isRounded, championVersion }) => css`
+  background-image: url("https://ddragon.leagueoflegends.com/cdn/${championVersion}/img/champion/${imageChampion}");
   background-size: contain;
   display: inline-block;
   height: 16px;
@@ -42,7 +42,7 @@ const SummonerName = styled.span`
   `}
 `
 
-function ParticipantRow({ championId, player }: Props) {
+function ParticipantRow({ championId, player, championVersion }: Props) {
   const champion = useSelector(state => getChampionById(state, championId))
   const summoner = useSelector(getSummonerEntitySelector)
 
@@ -50,6 +50,7 @@ function ParticipantRow({ championId, player }: Props) {
     <Link to={`/dashboard/${player.summonerName}`}>
       <Wrapper>
         <ImageChampion
+          championVersion={championVersion}
           isRounded={summoner.info.name === player.summonerName}
           imageChampion={champion.image.full}
         />

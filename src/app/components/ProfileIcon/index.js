@@ -2,7 +2,8 @@
 
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { PROFILEICON_VERSION } from 'app/api/config'
+import { useSelector } from 'react-redux'
+import { getVersionsSelector } from 'app/service/versions/selector'
 
 type Props = {
   profileIconId: number,
@@ -49,11 +50,13 @@ const Icon = styled.img`
 `
 
 function ProfileIcon({ profileIconId, summonerLevel, tier }: Props) {
+  const versions = useSelector(getVersionsSelector)
+
   return (
     <WrapperImage>
       {tier && <Border data-test="border" tier={tier} />}
       <Icon
-        src={`https://ddragon.leagueoflegends.com/cdn/${PROFILEICON_VERSION}/img/profileicon/${profileIconId}.png`}
+        src={`https://ddragon.leagueoflegends.com/cdn/${versions.profileicon}/img/profileicon/${profileIconId}.png`}
         alt="Profile icon summoner"
         data-test="icon"
       />

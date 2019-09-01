@@ -1,4 +1,4 @@
-import customAxios, { CHAMPION_VERSION, ITEM_VERSION, SUMMONER_VERSION } from './config'
+import customAxios from './config'
 
 /* -------------- SUMMONER -------------- */
 
@@ -14,16 +14,16 @@ export function getSummonerLeagueName(leagueId) {
   return customAxios.get(`/lol/league/v4/leagues/${leagueId}`)
 }
 
-export function getAllChampions() {
-  return customAxios.get(`/cdn/${CHAMPION_VERSION}/data/en_US/champion.json`)
+export function getAllChampions(championVersion) {
+  return customAxios.get(`/cdn/${championVersion}/data/en_US/champion.json`)
 }
 
-export function getSummonerSpells() {
-  return customAxios.get(`/cdn/${SUMMONER_VERSION}/data/en_US/summoner.json `)
+export function getSummonerSpells(summonerVersion) {
+  return customAxios.get(`/cdn/${summonerVersion}/data/en_US/summoner.json `)
 }
 
-export function getItems() {
-  return customAxios.get(`/cdn/${ITEM_VERSION}/data/en_US/item.json `)
+export function getItems(itemVersion) {
+  return customAxios.get(`/cdn/${itemVersion}/data/en_US/item.json `)
 }
 
 export function getMatchList(encryptedAccountId, params) {
@@ -35,5 +35,11 @@ export function getMatchById(matchId) {
 }
 
 export function getChampionsMasteries(encryptedSummonerId) {
-  return customAxios.get(`/lol/champion-mastery/v4/champion-masteries/by-summoner/${encryptedSummonerId}`)
+  return customAxios.get(
+    `/lol/champion-mastery/v4/champion-masteries/by-summoner/${encryptedSummonerId}`,
+  )
+}
+
+export function getVersions() {
+  return customAxios.get('/realms/euw.json')
 }

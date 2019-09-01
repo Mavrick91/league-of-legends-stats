@@ -2,13 +2,13 @@
 
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { ITEM_VERSION } from 'app/api/config'
 import blueBourse from 'app/ressources/images/blue_bourse.png'
 import redBourse from 'app/ressources/images/red_bourse.png'
 
 type Props = {
   items: $ReadOnlyArray<{ id: number, item: number }>,
   isWin: boolean,
+  itemVersion: number,
 }
 
 const Wrapper = styled.div`
@@ -41,7 +41,7 @@ const Container = styled.div`
   text-align: center;
 `
 
-function Build({ items, isWin }: Props) {
+function Build({ items, isWin, itemVersion }: Props) {
   return (
     <Wrapper>
       <Container>
@@ -52,7 +52,7 @@ function Build({ items, isWin }: Props) {
           return (
             <Item
               key={obj.id}
-              src={`http://ddragon.leagueoflegends.com/cdn/${ITEM_VERSION}/img/item/${obj.item}.png `}
+              src={`http://ddragon.leagueoflegends.com/cdn/${itemVersion}/img/item/${obj.item}.png `}
             />
           )
         })}

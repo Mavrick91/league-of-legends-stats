@@ -3,12 +3,11 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import NumberFormat from 'react-number-format'
-
-import { CHAMPION_VERSION } from 'app/api/config'
+import moment from 'moment'
 import { useSelector } from 'react-redux'
 import { getChampionById } from 'app/service/summoner/selector'
-import moment from 'moment'
 import { getLevel } from 'app/utils/image'
+import { getVersionsSelector } from 'app/service/versions/selector'
 
 type Props = {
   champion: {
@@ -64,13 +63,14 @@ const Wrapper = styled.tr`
 
 function Champions({ champion, index }: Props) {
   const champ = useSelector(state => getChampionById(state, champion.championId))
+  const versions = useSelector(getVersionsSelector)
 
   return (
     <Wrapper>
       <td>{index}</td>
       <ImageChamp>
         <img
-          src={`https://ddragon.leagueoflegends.com/cdn/${CHAMPION_VERSION}/img/champion/${champ.image.full}`}
+          src={`https://ddragon.leagueoflegends.com/cdn/${versions.champion}/img/champion/${champ.image.full}`}
           alt="champion"
         />
         <span>{champ.name}</span>

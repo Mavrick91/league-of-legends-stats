@@ -10,5 +10,9 @@ module.exports = function setupProxy(app) {
       changeOrigin: true,
       target: 'https://ddragon.leagueoflegends.com/',
     }),
+    proxy('/realms', {
+      changeOrigin: true,
+      target: 'https://ddragon.leagueoflegends.com/',
+    }),
   )
 }

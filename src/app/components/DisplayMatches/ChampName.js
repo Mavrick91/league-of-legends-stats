@@ -2,9 +2,10 @@
 
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { CHAMPION_VERSION, SUMMONER_VERSION } from 'app/api/config'
 
 type Props = {
+  championVersion: number,
+  summonerVersion: number,
   championImage: string,
   championName: string,
   summonerSpell1Image: string,
@@ -56,20 +57,22 @@ function ChampName({
   championImage,
   summonerSpell1Image,
   summonerSpell2Image,
+  championVersion,
+  summonerVersion,
 }: Props) {
   return (
     <Wrapper>
       <Champ>
         <ImageChampion
-          src={`https://ddragon.leagueoflegends.com/cdn/${CHAMPION_VERSION}/img/champion/${championImage}`}
+          src={`https://ddragon.leagueoflegends.com/cdn/${championVersion}/img/champion/${championImage}`}
         />
         <WrapperSummonerSpells>
           <img
-            src={`http://ddragon.leagueoflegends.com/cdn/${SUMMONER_VERSION}/img/spell/${summonerSpell1Image}`}
+            src={`http://ddragon.leagueoflegends.com/cdn/${summonerVersion}/img/spell/${summonerSpell1Image}`}
             alt=""
           />
           <img
-            src={`http://ddragon.leagueoflegends.com/cdn/${SUMMONER_VERSION}/img/spell/${summonerSpell2Image}`}
+            src={`http://ddragon.leagueoflegends.com/cdn/${summonerVersion}/img/spell/${summonerSpell2Image}`}
             alt=""
           />
         </WrapperSummonerSpells>
