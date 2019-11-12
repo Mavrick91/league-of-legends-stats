@@ -1,16 +1,15 @@
 // @flow
 
-import React from 'react'
+import { getAllChampionsSelector, getVersionsSelector } from 'app/service/staticData/selector'
 import { has } from 'ramda'
-import styled, { css } from 'styled-components'
+import React from 'react'
 import { useSelector } from 'react-redux'
-import { getAllChampionsSelector } from 'app/service/summoner/selector'
-import { getVersionsSelector } from 'app/service/versions/selector'
+import styled, { css } from 'styled-components'
 
 type Props = {
   matchDetails: Array<MatchDetailType>,
   summoner: {
-    info: SummonerType,
+    info: SummonerInfoType,
   },
 }
 
@@ -88,7 +87,7 @@ function RatioChamp({ matchDetails, summoner }: Props) {
         item => item.participantId === myParticipantId,
       ): any)
 
-      const champion = (Object.values(allChampions.data): any).find(
+      const champion = (Object.values(allChampions): any).find(
         c => c.key === participant.championId.toString(),
       )
 
@@ -97,7 +96,7 @@ function RatioChamp({ matchDetails, summoner }: Props) {
       return acc
     }, {})
     setChampions(tmpStateChamp)
-  }, [allChampions.data, matchDetails, summoner.info.id])
+  }, [allChampions, matchDetails, summoner.info.id])
 
   return (
     <Wrapper>

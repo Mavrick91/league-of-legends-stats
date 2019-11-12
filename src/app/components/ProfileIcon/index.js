@@ -1,9 +1,9 @@
 // @flow
 
+import { getVersionsSelector } from 'app/service/staticData/selector'
 import React from 'react'
-import styled, { css } from 'styled-components'
 import { useSelector } from 'react-redux'
-import { getVersionsSelector } from 'app/service/versions/selector'
+import styled, { css } from 'styled-components'
 
 type Props = {
   profileIconId: number,

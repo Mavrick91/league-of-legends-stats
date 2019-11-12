@@ -1,13 +1,12 @@
 // @flow
 
-import React from 'react'
-import styled, { css } from 'styled-components'
-import NumberFormat from 'react-number-format'
-import moment from 'moment'
-import { useSelector } from 'react-redux'
-import { getChampionById } from 'app/service/summoner/selector'
+import { getChampionById, getVersionsSelector } from 'app/service/staticData/selector'
 import { getLevel } from 'app/utils/image'
-import { getVersionsSelector } from 'app/service/versions/selector'
+import moment from 'moment'
+import React from 'react'
+import NumberFormat from 'react-number-format'
+import { useSelector } from 'react-redux'
+import styled, { css } from 'styled-components'
 
 type Props = {
   champion: {

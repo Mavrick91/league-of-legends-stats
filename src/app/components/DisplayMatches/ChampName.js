@@ -7,23 +7,25 @@ type Props = {
   championVersion: number,
   summonerVersion: number,
   championImage: string,
-  championName: string,
+  championName?: string,
+  champLevel?: number,
   summonerSpell1Image: string,
   summonerSpell2Image: string,
 }
 
 const ImageChampion = styled.img`
-  height: 46px;
-  width: 46px;
+  height: 100%;
   border-radius: 50%;
+  margin-right: 4px;
 `
 
 const WrapperSummonerSpells = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+
   & > img {
-    height: 22px;
-    width: 22px;
+    height: calc(96% / 2);
 
     &:nth-child(2) {
       margin-top: 2px;
@@ -40,7 +42,8 @@ const Wrapper = styled.div`
 
 const Champ = styled.div`
   display: flex;
-  justify-content: space-between;
+  height: 46px;
+  position: relative;
 `
 
 const Name = styled.div`
@@ -52,6 +55,22 @@ const Name = styled.div`
   `}
 `
 
+const ChampLevelStyled = styled.div`
+  ${({ theme: { colors } }) => css`
+    position: absolute;
+    left: -3px;
+    bottom: -3px;
+    width: 15px;
+    height: 15px;
+    color: ${colors.gray2};
+    font-size: 10px;
+    text-align: center;
+    line-height: 15px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+  `}
+`
+
 function ChampName({
   championName,
   championImage,
@@ -59,6 +78,7 @@ function ChampName({
   summonerSpell2Image,
   championVersion,
   summonerVersion,
+  champLevel,
 }: Props) {
   return (
     <Wrapper>
@@ -76,8 +96,9 @@ function ChampName({
             alt=""
           />
         </WrapperSummonerSpells>
+        {champLevel && <ChampLevelStyled>{champLevel}</ChampLevelStyled>}
       </Champ>
-      <Name>{championName}</Name>
+      {championName && <Name>{championName}</Name>}
     </Wrapper>
   )
 }

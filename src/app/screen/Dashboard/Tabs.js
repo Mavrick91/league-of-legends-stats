@@ -35,7 +35,7 @@ const Item = styled.div`
     display: block;
     min-width: 70px;
     border: 1px solid ${colors.white5};
-    border-bottom: 1px solid ${isActive ? colors.gray : '#c6cbcb'};
+    border-bottom: 1px solid ${isActive ? colors.gray : colors.white5};
     background-color: ${isActive ? colors.gray : colors.white1};
     color: ${colors.black11};
     font-size: 13px;

@@ -1,16 +1,16 @@
 // @flow
 
-import React from 'react'
-import { pick } from 'ramda'
-import { useDispatch, useSelector } from 'react-redux'
-import styled from 'styled-components'
-import SimpleCard from 'app/components/SimpleCard'
 import DisplayMatches from 'app/components/DisplayMatches'
-import { getMatchDetailsSelector, getMatchListSelector } from 'app/service/matches/selector'
+import SimpleCard from 'app/components/SimpleCard'
 import WinRateGames from 'app/components/WinRateGames'
 import { isEntityFetching } from 'app/service/entityFetching/selector'
+import { getMatchDetailsSelector, getMatchListSelector } from 'app/service/matches/selector'
 import { fetchSaga, resetEntity } from 'app/store/action'
-import { SummonerContext } from '../Dashboard'
+import { pick } from 'ramda'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import styled from 'styled-components'
+import { SummonerContext } from '../Dashboard/Dashboard'
 
 const Wrapper = styled.div`
   display: flex;
@@ -29,12 +29,13 @@ const LeftSide = styled.div`
 const RightSide = styled.div`
   display: flex;
   flex-direction: column;
+  width: 690px;
 `
 
 function Resume() {
   const { summoner, league, rankedSolo, rankedFlex } = React.useContext(SummonerContext)
-  const dispatch = useDispatch()
   const [champId, setChampId] = React.useState(null)
+  const dispatch = useDispatch()
   const matchDetails = useSelector(getMatchDetailsSelector)
   const matchLists = useSelector(getMatchListSelector)
   const isFetchingMatch = useSelector(state => isEntityFetching(state, 'matches'))

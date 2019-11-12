@@ -1,16 +1,16 @@
 // @flow
 
-import React from 'react'
-import { isEmpty } from 'ramda'
-import styled, { css } from 'styled-components'
 import { getLane } from 'app/utils/image'
 import { capitalize } from 'app/utils/string'
+import { isEmpty } from 'ramda'
+import React from 'react'
+import styled, { css } from 'styled-components'
 
 type Props = {
   matchDetails: Array<MatchDetailType>,
   matchLists: Array<MatchType>,
   summoner: {
-    info: SummonerType,
+    info: SummonerInfoType,
   },
 }
 
@@ -114,7 +114,7 @@ function RatioLane({ matchDetails, matchLists, summoner }: Props) {
       <span>Preferred Position (Rank)</span>
       {mainLane && (
         <Container>
-          {mainLane.map((matches: Array<MatchDetailType>) => {
+          {mainLane.map(matches => {
             if (isEmpty(matches)) return null
 
             const { lane, win } = matches.reduce(getStats, { lane: null, win: 0 })

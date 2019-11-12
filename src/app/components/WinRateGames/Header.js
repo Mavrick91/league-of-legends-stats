@@ -1,9 +1,9 @@
 // @flow
 
+import { getAllChampionsSelector } from 'app/service/staticData/selector'
 import React from 'react'
-import styled, { css } from 'styled-components'
 import { useSelector } from 'react-redux'
-import { getAllChampionsSelector } from 'app/service/summoner/selector'
+import styled, { css } from 'styled-components'
 
 type Props = {
   setChampId: number => void,
@@ -111,7 +111,7 @@ function Header({ setChampId }: Props) {
   }, [displayList])
 
   function displayAllChamp() {
-    const champFiltered = (Object.values(allChampions.data): any).filter(champ =>
+    const champFiltered = (Object.values(allChampions): any).filter(champ =>
       champ.name.toLowerCase().includes(champName),
     )
     champFiltered.unshift({ name: 'Tous les champions', key: null })

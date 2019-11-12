@@ -7,8 +7,8 @@ import ParticipantRow from './ParticipantRow'
 type Props = {
   championVersion: number,
   myTeamId: number,
-  participants: $ReadOnlyArray<ParticipantType>,
-  participantIdentities: $ReadOnlyArray<ParticipantIdentityType>,
+  participants: $ReadOnlyArray<ParticipantsType>,
+  participantIdentities: $ReadOnlyArray<ParticipantIdentitiesType>,
 }
 
 const Wrapper = styled.div`

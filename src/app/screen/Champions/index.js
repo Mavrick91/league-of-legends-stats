@@ -1,15 +1,15 @@
 // @flow
 
+import LoaderCustom from 'app/components/LoaderCustom'
+import Sort from 'app/ressources/images/svg/sort'
+import { getChampionsMasteriesSelector } from 'app/service/masteries/selector'
+import { fetchSaga } from 'app/store/action'
+import { prop, sortBy } from 'ramda'
 import React from 'react'
-import { sortBy, prop } from 'ramda'
 import { useDispatch, useSelector } from 'react-redux'
 import styled, { css } from 'styled-components'
-import { fetchSaga } from 'app/store/action'
-import { getChampionsMasteriesSelector } from 'app/service/masteries/selector'
-import Sort from 'app/ressources/images/svg/sort'
+import { SummonerContext } from '../Dashboard/Dashboard'
 import Champions from './Champions'
-import { SummonerContext } from '../Dashboard'
-import LoaderCustom from '../../components/LoaderCustom'
 
 const Wrapper = styled.table`
   ${({ theme: { colors } }) => css`

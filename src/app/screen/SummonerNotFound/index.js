@@ -64,7 +64,7 @@ function SummonerNotFound() {
   return (
     <Wrapper>
       <span>
-        {" Cet utilisateur n'est pas répertorié sur GG-WP. Veuillez vérifier l’orthographe."}
+        Cet utilisateur n&apos;est pas répertorié sur GG-WP. Veuillez vérifier l’orthographe.
       </span>
       <SummonerContainer>
         {defaultSummoner.map(summoner => (

@@ -7,7 +7,7 @@ import styled, { css } from 'styled-components'
 type Props = {
   matchDetails: Array<MatchDetailType>,
   summoner: {
-    info: SummonerType,
+    info: SummonerInfoType,
   },
 }
 

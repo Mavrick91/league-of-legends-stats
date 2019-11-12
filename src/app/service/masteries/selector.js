@@ -1,5 +1,5 @@
+import { getChampionById } from 'app/service/staticData/selector'
 import { createSelector } from 'reselect'
-import { getChampionById } from 'app/service/summoner/selector'
 
 const getChampionsMasteries = state => state.entities.masteries || {}
 

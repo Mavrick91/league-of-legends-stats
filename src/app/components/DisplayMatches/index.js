@@ -7,7 +7,7 @@ import MatchRow from './MatchRow'
 type Props = {
   matchDetails: $ReadOnlyArray<$Exact<MatchDetailType>>,
   summoner: {
-    info: SummonerType,
+    info: SummonerInfoType,
   },
 }
 

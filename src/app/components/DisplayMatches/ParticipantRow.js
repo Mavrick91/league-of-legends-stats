@@ -1,10 +1,11 @@
 // @flow
 
+import { getChampionById } from 'app/service/staticData/selector'
+import { getSummonerEntitySelector } from 'app/service/summoner/selector'
 import React from 'react'
-import styled, { css } from 'styled-components'
-import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { getChampionById, getSummonerEntitySelector } from 'app/service/summoner/selector'
+import { Link } from 'react-router-dom'
+import styled, { css } from 'styled-components'
 
 type Props = {
   championVersion: number,

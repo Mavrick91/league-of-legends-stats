@@ -1,31 +1,26 @@
-import { call, put, takeEvery, select } from 'redux-saga/effects'
-import { fetchEndpoint } from 'app/store/saga'
 import * as Api from 'app/api/endpoints'
-import { getVersionsSelector } from 'app/service/versions/selector'
+import { fetchEndpoint } from 'app/store/saga'
+import { call, put, takeEvery } from 'redux-saga/effects'
 
-export function* fetchAll({ entityName, payload }) {
-  const versions = yield select(getVersionsSelector)
-
+export function* fetchSummoner({ entityName, payload }) {
   const { summonerName } = payload
-  const e = {
-    info: {},
-  }
 
   try {
-    e.info = yield call(fetchEndpoint, Api.getSummonerByName, summonerName)
-    e.myleague = yield call(fetchEndpoint, Api.getSummonerLeague, e.info.id)
-    e.league =
-      e.myleague.length >= 1
-        ? yield call(fetchEndpoint, Api.getSummonerLeagueName, e.myleague[0].leagueId)
+    const info = yield call(fetchEndpoint, Api.getSummonerByName, summonerName)
+    const myleague = yield call(fetchEndpoint, Api.getSummonerLeague, info.id)
+    const league =
+      myleague.length >= 1
+        ? yield call(fetchEndpoint, Api.getSummonerLeagueName, myleague[0].leagueId)
         : null
-    e.allchampions = yield call(fetchEndpoint, Api.getAllChampions, versions.champion)
-    e.summonerspells = yield call(fetchEndpoint, Api.getSummonerSpells, versions.summoner)
-    e.items = yield call(fetchEndpoint, Api.getItems, versions.item)
 
     yield put({
       type: 'ENTITIES_SUCCESS',
       entityName,
-      payload: e,
+      payload: {
+        info,
+        myleague,
+        league,
+      },
     })
   } catch (error) {
     yield put({
@@ -37,5 +32,5 @@ export function* fetchAll({ entityName, payload }) {
 }
 
 export default function* saga() {
-  yield takeEvery('SUMMONER_REQUEST', fetchAll)
+  yield takeEvery('SUMMONER_REQUEST', fetchSummoner)
 }

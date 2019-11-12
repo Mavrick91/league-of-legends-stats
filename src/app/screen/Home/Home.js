@@ -1,12 +1,12 @@
 // @flow
 
-import React from 'react'
-import { Form } from 'redux-form'
-import { useCookies } from 'react-cookie'
-import styled, { css } from 'styled-components'
-import type { formPropTypes } from 'redux-form'
 import TextFieldInput from 'app/components/TextField'
 import banner from 'app/ressources/images/banner_home.png'
+import React from 'react'
+import { useCookies } from 'react-cookie'
+import type { formPropTypes } from 'redux-form'
+import { Form } from 'redux-form'
+import styled, { css } from 'styled-components'
 import ListPlayers from './ListPlayers'
 import Tabs from './Tabs'
 
@@ -58,6 +58,7 @@ function Home({ handleSubmit, history }: formPropTypes) {
   const [activeTab, setActiveTab] = React.useState(0)
   const [showList, setShowList] = React.useState(false)
   const [players, setPlayers] = React.useState([])
+  const shadowRef = React.useRef(null)
 
   React.useEffect(() => {
     let allPLayers = []
@@ -70,6 +71,17 @@ function Home({ handleSubmit, history }: formPropTypes) {
     setPlayers(allPLayers.filter(Boolean).reverse())
   }, [cookies.recentPlayers, cookies.favoritePlayers, activeTab])
 
+  const handleClickOutside = React.useCallback((event: MouseEvent) => {
+    if (shadowRef.current && !shadowRef.current.contains(event.target)) {
+      setShowList(false)
+    }
+  }, [])
+
+  React.useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [handleClickOutside])
+
   function onSubmit(value) {
     if (players.length <= 9 && !players.includes(value.summonerName))
       setCookie('recentPlayers', `${cookies.recentPlayers || ''}${value.summonerName}${separator}`)
@@ -81,7 +93,7 @@ function Home({ handleSubmit, history }: formPropTypes) {
     <Wrapper>
       <Container>
         <Banner src={banner} />
-        <Shadow>
+        <Shadow ref={shadowRef}>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <InputStyled
               name="summonerName"

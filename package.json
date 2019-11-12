@@ -17,6 +17,7 @@
     "eslint-plugin-react-hooks": "^1.6.1",
     "history": "latest",
     "http-proxy-middleware": "latest",
+    "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "prettier": "^1.18.2",
     "ramda": "^0.26.1",

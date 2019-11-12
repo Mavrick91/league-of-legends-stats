@@ -1,18 +1,18 @@
 // @flow
 
-import React from 'react'
 import LoaderCustom from 'app/components/LoaderCustom'
+import React from 'react'
 import styled, { css } from 'styled-components'
-import RatioGame from './RatioGame'
-import RatioChamp from './RatioChamp'
-import RatioLane from './RatioLane'
 import Header from './Header'
+import RatioChamp from './RatioChamp'
+import RatioGame from './RatioGame'
+import RatioLane from './RatioLane'
 
 type Props = {
   matchDetails: Array<MatchDetailType>,
   matchLists: Array<MatchType>,
   summoner: {
-    info: SummonerType,
+    info: SummonerInfoType,
   },
 
   setChampId: number => void,
@@ -33,7 +33,6 @@ const Content = styled.div`
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
     height: 156px;
-    width: 690px;
   `}
 `
 
