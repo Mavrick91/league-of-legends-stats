@@ -124,27 +124,27 @@ const Summary = ({ enemyTeam, myTeam, myParticipants, enemyParticipants }: Props
   const myDatasIcons =
     myTeam.win === 'Fail'
       ? [
-          { image: baronR, value: myTeam.baronKills },
-          { image: dragonR, value: myTeam.dragonKills },
-          { image: towerR, value: myTeam.towerKills },
-        ]
+        { image: baronR, value: myTeam.baronKills },
+        { image: dragonR, value: myTeam.dragonKills },
+        { image: towerR, value: myTeam.towerKills },
+      ]
       : [
-          { image: baronB, value: myTeam.baronKills },
-          { image: dragonB, value: myTeam.dragonKills },
-          { image: towerB, value: myTeam.towerKills },
-        ]
+        { image: baronB, value: myTeam.baronKills },
+        { image: dragonB, value: myTeam.dragonKills },
+        { image: towerB, value: myTeam.towerKills },
+      ]
   const enemyDatasIcons =
     enemyTeam.win !== 'Fail'
       ? [
-          { image: baronB, value: enemyTeam.baronKills },
-          { image: dragonB, value: enemyTeam.dragonKills },
-          { image: towerB, value: enemyTeam.towerKills },
-        ]
+        { image: baronB, value: enemyTeam.baronKills },
+        { image: dragonB, value: enemyTeam.dragonKills },
+        { image: towerB, value: enemyTeam.towerKills },
+      ]
       : [
-          { image: baronR, value: enemyTeam.baronKills },
-          { image: dragonR, value: enemyTeam.dragonKills },
-          { image: towerR, value: enemyTeam.towerKills },
-        ]
+        { image: baronR, value: enemyTeam.baronKills },
+        { image: dragonR, value: enemyTeam.dragonKills },
+        { image: towerR, value: enemyTeam.towerKills },
+      ]
 
   function displayTotalKillsGolds(myTeamData, enemyTeamData) {
     return (
